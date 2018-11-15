@@ -1,0 +1,28 @@
+---
+title: "Daten bekommen"
+author: "Jan-Philipp Kolb"
+date: "15 November 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+library(tmaptools)
+gc_hs <- geocode_OSM("Oberbettringer Str. 200, Schwäbisch Gmünd")
+```
+
+```{r}
+library(ggmap)
+gc_am <- c( 9.829462 ,48.791510 )
+map_sg <- qmap(gc_am, zoom = 14, source = "osm", scale = 20000)
+```
+
+
+## 
+
+
+# https://wiki.lstsim.de/Liste_der_Krankenh%C3%A4user_in_Deutschland
