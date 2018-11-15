@@ -24,5 +24,7 @@ map_sg <- qmap(gc_am, zoom = 14, source = "osm", scale = 20000)
 
 ## 
 
+<!--
+https://wiki.lstsim.de/Liste_der_Krankenh%C3%A4user_in_Deutschland
 
-# https://wiki.lstsim.de/Liste_der_Krankenh%C3%A4user_in_Deutschland
+-->
