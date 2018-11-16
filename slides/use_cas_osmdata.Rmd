@@ -1,0 +1,64 @@
+---
+title: "Use case - health infrastructure"
+author: "Jan-Philipp Kolb"
+date: "16 November 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,eval=F)
+```
+
+## 
+
+
+```{r}
+library("osmdata")
+```
+
+- Umriss für Deutschland
+
+```{r}
+bbox <- getbb("Deutschland")
+```
+
+
+## [DE:Key:healthcare](https://wiki.openstreetmap.org/wiki/DE:Key:healthcare)
+
+![](figure/key_healthcare.PNG)
+
+
+
+## blood donation
+
+![](figure/healthcare_blood_donation.PNG)
+
+
+```{r,eval=F,echo=F}
+dat_osm <- extract_osm_objects(key='healthcare',
+value="blood_donation",bbox=bbox)
+```
+
+https://overpass-turbo.eu/
+
+```
+node
+  [healthcare=blood_donation]
+  ({{bbox}});
+out;
+```
+
+## Alternativmediziner
+
+```
+node
+  [healthcare=alternative]
+  ({{bbox}});
+out;
+```
+
+```{r}
+
+```
+
+
