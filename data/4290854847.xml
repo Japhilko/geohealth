@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<osm version="0.6" generator="CGImap 0.6.1 (2534 thorn-01.openstreetmap.org)" copyright="OpenStreetMap and contributors" attribution="http://www.openstreetmap.org/copyright" license="http://opendatacommons.org/licenses/odbl/1-0/">
+ <node id="4290854847" visible="true" version="8" changeset="63938073" timestamp="2018-10-27T21:35:13Z" user="ika-chan!" uid="4763179" lat="52.3789010" lon="4.9005805">
+  <tag k="name" v="Amsterdam Centraal"/>
+  <tag k="name:de" v="Amsterdamer Hauptbahnhof"/>
+  <tag k="name:es" v="Estación Central de Ámsterdam"/>
+  <tag k="name:ko" v="암스테르담 중앙역"/>
+  <tag k="name:nl" v="Amsterdam Centraal"/>
+  <tag k="operator" v="NS"/>
+  <tag k="public_transport" v="station"/>
+  <tag k="railway" v="station"/>
+  <tag k="railway:ref" v="Asd"/>
+  <tag k="railway:ref:DB" v="XNAC"/>
+  <tag k="railway:ref:NMBS/SNCB" v="XNASD"/>
+  <tag k="uic_ref" v="8400058"/>
+  <tag k="wikidata" v="Q50719"/>
+  <tag k="wikipedia" v="nl:Station Amsterdam Centraal"/>
+  <tag k="zone" v="5700"/>
+ </node>
+</osm>
