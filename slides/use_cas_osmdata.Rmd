@@ -9,6 +9,11 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE,eval=F)
 ```
 
+##
+
+![](figure/definition-of-latitude-longitude.jpg)
+
+
 ## 
 
 
@@ -61,4 +66,18 @@ out;
 
 ```
 
+
+<!--
+https://medium.com/fastah-project/a-quick-start-to-maps-in-r-b9f221f44ff3
+
+https://www.andybeger.com/2013/08/06/finding-coordinates-for-cities-etc-with-r/
+
+https://stackoverflow.com/questions/13905098/how-to-get-the-longitude-and-latitude-coordinates-from-a-city-name-and-country-i
+-->
+
+## 
+
+```{r,eval=F}
+?openmap
+```
 
