@@ -1,0 +1,22 @@
+---
+title: "Geomedizin"
+author: "Jan-Philipp Kolb"
+date: "6 1 2019"
+output: beamer_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## 
+
+
+- [Medizinische Geographie](https://de.wikipedia.org/wiki/Medizinische_Geographie)
+
+- [Geographische Gesundheitsforschung](http://fabianbross.de/geographische-gesundheitsforschung.html)
+
+
+## R-Pakete
+
+- [Awesome R](https://awesome-r.com/)
