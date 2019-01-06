@@ -66,10 +66,11 @@ library("Rcmdr")
 
 ![Der Rcommander](figure/Rcommanderex.PNG)
 
+<!--
 ## [**Die Beliebtheit von R-Paketen**](https://gallery.shinyapps.io/cran-gauge/)
 
 ![Downloads vom CRAN Server](figure/CRANdownloads.PNG)
-
+-->
 
 ## Download R:
 
