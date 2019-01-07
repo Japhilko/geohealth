@@ -15,14 +15,14 @@ library(tmaptools)
 gc_hs <- geocode_OSM("Oberbettringer Str. 200, Schwäbisch Gmünd")
 ```
 
-```{r}
+```{r,eval=F,echo=F}
 library(ggmap)
 gc_am <- c( 9.829462 ,48.791510 )
 map_sg <- qmap(gc_am, zoom = 14, source = "osm", scale = 20000)
 ```
 
 
-## 
+## Ein erstes Bild bekommen
 
 <!--
 https://wiki.lstsim.de/Liste_der_Krankenh%C3%A4user_in_Deutschland
@@ -37,8 +37,13 @@ map <- openmap(c(48.791510,9.809462),
                c(48.801510,9.829462),
                type="osm")
 plot(map)
-
 ```
+
+
+
+
+
+## Weitere Pakete
 
 
 ```{r,eval=F}
@@ -50,8 +55,17 @@ if (!require("ggmap")) install.packages("ggmap")
 ```
 
 
+```{r,eval=F}
+devtools::install_github("milesmcbain/slippymath")
+```
 
 ```{r}
+library(slippymath)
+```
+
+
+
+```{r,eval=F,echo=F}
 library(ggmap)
 Adm_map16 <- qmap(c(4.901323,52.36896), zoom = 16,maptype="toner-lite",source="stamen")
 
@@ -59,3 +73,24 @@ gc_adm <- data.frame(lon=9.829462,lat=48.791510)
 map + geom_point(aes(x = lon, y = lat), data = gc_adm,size=5, col="red") 
 ```
 
+
+
+## Links
+
+- [ESRI World Imiginary](http://leaflet-extras.github.io/leaflet-providers/preview/#filter=Esri.WorldImagery)
+- [Paket slippymath](https://github.com/MilesMcBain/slippymath)
+
+<!--
+https://twitter.com/coraloha/status/1068326799086510080
+
+https://github.com/tim-salabim/mvl/blob/master/logo_script.R#L35
+
+http://www.soest.hawaii.edu/wessel/gshhg/
+
+
+https://github.com/jmlondon/ptolemy
+https://github.com/hypertidy/ceramic
+https://github.com/mdsumner/tasmapr/blob/master/README.md
+https://atriplex.info/blog/
+
+-->

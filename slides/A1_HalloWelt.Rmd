@@ -35,6 +35,53 @@ Normalerweise gibt es große Unterschiede bei Vorkenntnissen und Fähigkeiten - 
 - Ich habe viele [**Beispiele**](https://www.showmeshiny.com/) - probiert sie aus 
 - R macht mehr Spaß zusammen - arbeitet zusammen!
 
+
+### Motivation allgemein
+
+- Raumbezug herstellen/nutzen
+- Sekundäranalyse für bestehenden Daten 
+- Analysepotentiale der Geokodierung vorstellen
+- Verbindung von sozial- mit raumwissenschaftlichen Daten
+
+
+### Warum die Darstellung in Karten
+
+- Darstellung in Karten ermöglicht besseres Verständnis von sozialwissenschaftlicher Phänomene - Attraktiver Output
+
+- Durch die INSPIRE Richtlinie und *Collaborative Mapping* wächst der verfügbare Bestand an Geodaten.
+
+- Daten sind oft frei verfügbar im Internet (z.B. Nutzung von APIs)
+- Die Daten sind oft wenig oder gar nicht strukturiert, heterogen und oft nicht zur räumlichen Visualisierung vorgesehen, beinhalten aber implizit  geographische Informationen (Web 2.0)
+- Oftmals sind wenig oder keine Metadaten vorhanden
+
+
+## Was heißt das für diesen Kurs
+
+### Vorgestellt werden:
+
+- Möglichkeiten für den Download, den Import, die Verarbeitung und die Visualisierung von Geodaten 
+
+
+
+<!--
+Die Daten auf OSM werden unter der Open Database License (ODbL) 1.0 freigegeben. Das ermöglicht eine Mehrfachverwendung der Daten \citep{schmidt2013extraction}. Die Studie von \cite{barrington2017world} zeigt, dass die Datenqualität von OSM in vielen Ländern bereits ausreichend ist, um sie für wissenschaftliche und analytische Zwecke zu nutzen.
+Siehe zum Beispiel das Projekt Simulation of Urban MObility (SUMO) (\citealt{behrisch2011sumo}). Viel mehr Forschung, die in verschiedenen Ländern durchgeführt wird, ist unter \cite{wiki:research} aufgeführt.
+-->
+
+- Quellen für Geodaten
+
+- Bspw. die wichtigsten Programmierschnittstellen (APIs) um die Daten zu bekommen
+
+- R-Pakete um diese Daten zu verarbeiten und zu visualisieren
+
+
+## [Das Thema Geodatenlandschaft](https://www.ratswd.de/dl/downloads/RatSWD_Geodatenbericht.pdf)
+
+
+![](figure/BildRatSWDBericht.png)
+
+
+
 ## Gründe R zu nutzen...
 
 - ... R ist eine [**quelloffene Sprache**](https://stackoverflow.com/questions/1546583/what-is-the-definition-of-an-open-source-programming-language)
@@ -53,6 +100,7 @@ Normalerweise gibt es große Unterschiede bei Vorkenntnissen und Fähigkeiten - 
 
 - Schnittstelle zu: [**Python**](https://cran.r-project.org/web/packages/reticulate/vignettes/calling_python.html), [**Excel**](https://www.springer.com/de/book/9781441900517), [**SPSS**](https://www.ibm.com/support/knowledgecenter/en/SSFUEU_7.2.0/com.ibm.swg.ba.cognos.op_capmod_ig.7.2.0.doc/t_essentials_for_r_statistics.html), [**SAS**](https://cran.r-project.org/web/packages/SASmixed/index.html), [**Stata**](https://cran.r-project.org/web/packages/RStata/index.html)  
 
+<!--
 ## R für SPSS Nutzer
 
 ```{r,eval=F,echo=F}
@@ -65,6 +113,8 @@ library("Rcmdr")
 - [**R commander (Rcmdr)**](http://www.rcommander.com/)
 
 ![Der Rcommander](figure/Rcommanderex.PNG)
+-->
+
 
 ## [**Die Beliebtheit von R-Paketen**](https://gallery.shinyapps.io/cran-gauge/)
 
@@ -96,6 +146,7 @@ Aus den folgenden Gründen:
 - Auto-Vervollständigung
 - Bessere Übersicht über Graphiken, Pakete, Dateien, ...
 
+<!--
 ## Various text editors / IDEs
 
 - [**Gedit**](https://projects.gnome.org/gedit/) with R-specific Add-ons for Linux
@@ -105,6 +156,7 @@ Aus den folgenden Gründen:
 - I use [**Rstudio!**](https://www.rstudio.com/)
 
 ![[Overview Rstudio](http://www.milanor.net/blog/wp-content/uploads/2013/07/0_overall.jpg)](figure/0_overall.jpg)
+-->
 
 ## RStudio
 
@@ -160,6 +212,7 @@ length(b) # b has the length 2
 str(b) # b is a numeric vector
 ```
 
+<!--
 ## Funktionen in base-Paket
 
 |Function |Meaning            |Example   |
@@ -215,6 +268,7 @@ var(b)
 
 ![](figure/UebersichtBefehle.PNG)
 
+-->
 
 ## A1B Übung - Zuweisungen und Funktionen
 
@@ -244,11 +298,11 @@ info <- available.packages(contriburl = cran, type = "source")
 - Viele spezifische Funktionen sind in zusätzliche Bibliotheken integriert.
 - R kann modular durch sogenannte Pakete oder Bibliotheken erweitert werden.
 - Die wichtigsten Pakete, die auf CRAN gehostet werden (`r nrow(info)` at `r format(Sys.time(), "%a %b %d")`)
-- Weitere Pakete finden Sie z.B. unter [**bioconductor**](www.bioconductor.org)
+- Weitere Pakete findet man z.B. unter [**bioconductor**](www.bioconductor.org)
 
-## Übersicht R-Pakete
+## [Übersicht R-Pakete](https://www.youtube.com/watch?v=kKI9--Opmso)
 
-![Overview R-packages](figure/Packages.PNG)
+![Overview R-packages](figure/packages_overview.PNG)
 
 ## Installation von Paketen
 
@@ -257,9 +311,9 @@ info <- available.packages(contriburl = cran, type = "source")
 - Man kann auch `require` anstelle von `library` verwenden.
 
 ```{r,eval=F}
-install.packages("lme4")
+install.packages("raster")
 
-library(lme4)
+library(raster)
 ```
 
 ## Installation von Paketen mit RStudio
@@ -274,10 +328,21 @@ library(lme4)
 
 ## Übersicht über viele nützliche Pakete:
 
-- Luhmann - [**Table with many useful packages**](http://www.beltz.de/fileadmin/beltz/downloads/OnlinematerialienPVU/28090_Luhmann/Verwendete%20Pakete.pdf)
+- Luhmann - [**Übersicht mit vielen nützlichen Paketen**](http://www.beltz.de/fileadmin/beltz/downloads/OnlinematerialienPVU/28090_Luhmann/Verwendete%20Pakete.pdf)
 
 ### Weitere interessante Pakete:
 
+- Das Paket `sf` - bietet Zugang zu [**simple features**](https://de.wikipedia.org/wiki/Simple_Feature_Access).
+- Mit dem Paket `leaflet` kann man interaktive Karten erstellen.
+- Das Paket `tmap` kann zur Erstellung von thematischen Karten genutzt werden.
+- [**Paket `maptools` um Karten zu erzeugen**](http://www.r-bloggers.com/tag/maptools/)
+
+
+![](figure/logo_sf.PNG)
+
+
+
+<!--
 - Paket für Import/Export - [**`foreign`**](http://cran.r-project.org/web/packages/foreign/foreign.pdf)
 
 - [**`sampling`-Paket für die Stichprobenziehung**](http://iase-web.org/documents/papers/icots8/ICOTS8_4J1_TILLE.pdf)
@@ -288,8 +353,7 @@ library(lme4)
 
 - [**Paket `mvtnorm` um eine multivariate Normalverteilung zu erhalten. **](http://cran.r-project.org/web/packages/mvtnorm/index.html)
 
-- [**Paket `maptools` um Karten zu erzeugen**](http://www.r-bloggers.com/tag/maptools/)
-
+-->
 
 ## Pakete aus verschiedenen Quellen installieren
 
@@ -314,7 +378,7 @@ biocLite(c("GenomicFeatures", "AnnotationDbi"))
 install.packages("devtools")
 library(devtools)
 
-install_github("hadley/ggplot2")
+install_github("hadley/maptools")
 ```
 
 
@@ -342,20 +406,22 @@ install_github("hadley/ggplot2")
 ```{r,eval=F}
 install.packages("ctv")
 library("ctv")
-install.views("Bayesian")
+install.views("Spatial")
 ```
 
 ![](figure/CRANtaskViews.PNG)
 
 ## A1C Übung -  zusätzliche Pakete
 
-Geht auf <https://cran.r-project.org/> und sucht nach Paketen...
+Geh bspw. auf <https://cran.r-project.org/> und suche nach Paketen...
 
-- die sich für die deskriptive Datenanalyse eignen.
-- mit denen man fremde Datensätze einlesen kann (z.B. SPSS data)
-- mit denen man Lasso Regressionen rechnen kann
-- mit denen man große Datenmengen bearbeiten kann
+- die sich für interaktive Karten eignen.
+- mit denen man thematische Karten erstellen kann
+- mit denen man die räumliche Distanz berechnen kann
+- mit denen man eine Satelitenkarte bekommen kann
 
+
+<!--
 ## Links zum Weiterlesen:
 
 
@@ -371,6 +437,8 @@ Geht auf <https://cran.r-project.org/> und sucht nach Paketen...
 - [Intro R II](http://www.ats.ucla.edu/stat/r/sk/)
 -->
 
+<!--
+
 - Vergleich zwischen [**python und R**](http://www.dataschool.io/python-or-r-for-data-science/)
 
 - R und Stata - [**Side-by-side**](http://economistry.com/2013/11/r-impact-evaluation-r-stata-side-side/)
@@ -381,13 +449,56 @@ Geht auf <https://cran.r-project.org/> und sucht nach Paketen...
 
 - [**Zwei Minuten Videos auf Github**](https://www.youtube.com/playlist?list=PLcgz5kNZFCkzSyBG3H-rUaPHoBXgijHfC)
 
+-->
 
+<!--
 ## Shiny App - Einführung in R
 
 http://www.intro-stats.com/
 
 ![](figure/intror_shiny.PNG)
+-->
+
 
 <!--
 https://craigwang.shinyapps.io/rPackageStats/
 -->
+
+
+## Robin Lovelace - [Geocomputation with R](https://geocompr.robinlovelace.net/)
+
+![](figure/cover_lovelace.png)
+
+
+## Typen von [simple feature die von `sf` unterstützt werden.](https://geocompr.robinlovelace.net/spatial-class.html)
+
+![](figure/sf-classes.png)
+
+
+## Erste Weltkarten
+
+```{r}
+library(sf)
+library(spData) 
+plot(world)
+```
+
+## Nur einen Indikator plotten
+
+```{r}
+plot(world["lifeExp"],main="Lebenserwartung in Jahren")
+```
+
+## Eine andere Darstellungsform
+
+```{r}
+ hist(world$lifeExp,col="blue",xlab="Lebenserwartung",
+      ylab="Häufigkeit")
+```
+
+
+## [Rasterdaten](https://geocompr.robinlovelace.net/spatial-class.html)
+
+![](figure/raster-intro-plot-1.png)
+
+
