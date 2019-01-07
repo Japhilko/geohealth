@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6600 64-bit) (preloaded format=pdflatex 2018.2.7)  6 JAN 2019 08:43
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6600 64-bit) (preloaded format=pdflatex 2018.2.7)  6 JAN 2019 10:37
 entering extended mode
 **./A1_HalloWelt.tex
 (A1_HalloWelt.tex
@@ -1684,26 +1684,130 @@ Overfull \vbox (9.27397pt too high) detected at line 263
  <./figure/BasisR.PNG>] [8
 
 ]
+<figure/0_overall.jpg, id=116, 1115.16624pt x 785.93625pt>
+File: figure/0_overall.jpg Graphic file (type jpg)
+<use figure/0_overall.jpg>
+Package pdftex.def Info: figure/0_overall.jpg  used on input line 305.
+(pdftex.def)             Requested size: 342.43088pt x 241.33517pt.
 
-LaTeX Warning: File `figure/0_overall.jpg' not found on input line 305.
+Overfull \vbox (98.3478pt too high) detected at line 305
+ []
+
+[9
+
+ <./figure/0_overall.jpg>]
+<figure/RstudioExample.PNG, id=124, 1155.71774pt x 630.55576pt>
+File: figure/RstudioExample.PNG Graphic file (type png)
+<use figure/RstudioExample.PNG>
+Package pdftex.def Info: figure/RstudioExample.PNG  used on input line 312.
+(pdftex.def)             Requested size: 342.43274pt x 186.83015pt.
+[10
+
+ <./figure/RstudioExample.PNG>]
+\openout4 = `A1_HalloWelt.vrb'.
+
+(A1_HalloWelt.vrb
+LaTeX Font Info:    Try loading font information for T1+lmtt on input line 22.
+("C:\Program Files\MiKTeX 2.9\tex\latex\lm\t1lmtt.fd"
+File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10.95> not available
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 23.
+) [11
+
+]
+\openout4 = `A1_HalloWelt.vrb'.
+
+(A1_HalloWelt.vrb)
+Overfull \vbox (14.39795pt too high) detected at line 425
+ []
+
+[12
+
+]
+
+Package longtable Warning: Column widths have changed
+(longtable)                in table 1 on input line 447.
+
+[13
+
+]
+\openout4 = `A1_HalloWelt.vrb'.
+
+(A1_HalloWelt.vrb
+
+Package longtable Warning: Column widths have changed
+(longtable)                in table 2 on input line 14.
+
+) [14
+
+]
+\openout4 = `A1_HalloWelt.vrb'.
+
+(A1_HalloWelt.vrb) [15
+
+]
+\openout4 = `A1_HalloWelt.vrb'.
+
+(A1_HalloWelt.vrb) [16
+
+]
+<figure/UebersichtBefehle.PNG, id=182, 743.1765pt x 493.845pt>
+File: figure/UebersichtBefehle.PNG Graphic file (type png)
+<use figure/UebersichtBefehle.PNG>
+Package pdftex.def Info: figure/UebersichtBefehle.PNG  used on input line 568.
+(pdftex.def)             Requested size: 342.44368pt x 227.55576pt.
+
+Overfull \vbox (32.90584pt too high) detected at line 568
+ []
+
+[17
+
+ <./figure/UebersichtBefehle.PNG>]
+\openout4 = `A1_HalloWelt.vrb'.
+
+(A1_HalloWelt.vrb) [18
+
+] [19
+
+]
+<figure/Packages.PNG, id=209, 583.42969pt x 426.09187pt>
+File: figure/Packages.PNG Graphic file (type png)
+<use figure/Packages.PNG>
+Package pdftex.def Info: figure/Packages.PNG  used on input line 618.
+(pdftex.def)             Requested size: 340.66846pt x 248.79787pt.
+
+Overfull \vbox (31.01045pt too high) detected at line 618
+ []
+
+[20
+
+ <./figure/Packages.PNG>]
+\openout4 = `A1_HalloWelt.vrb'.
+
+(A1_HalloWelt.vrb) [21
+
+]
+
+LaTeX Warning: File `figure/PaketeRstudio.PNG' not found on input line 650.
 
 
-! Package pdftex.def Error: File `figure/0_overall.jpg' not found: using draft 
-setting.
+! Package pdftex.def Error: File `figure/PaketeRstudio.PNG' not found: using dr
+aft setting.
 
 See the pdftex.def package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.305 \end{frame}
+l.650 \end{frame}
                   
 Here is how much of TeX's memory you used:
- 24234 strings out of 493337
- 440789 string characters out of 3139439
- 516600 words of memory out of 3000000
- 27229 multiletter control sequences out of 15000+200000
- 48054 words of font info for 52 fonts, out of 3000000 for 9000
+ 24372 strings out of 493337
+ 443559 string characters out of 3139439
+ 522600 words of memory out of 3000000
+ 27304 multiletter control sequences out of 15000+200000
+ 49111 words of font info for 56 fonts, out of 3000000 for 9000
  1127 hyphenation exceptions out of 8191
- 56i,17n,57p,416b,563s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 56i,17n,57p,416b,595s stack positions out of 5000i,500n,10000p,200000b,50000s
 
 !  ==> Fatal error occurred, no output PDF file produced!
