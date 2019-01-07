@@ -1,0 +1,25 @@
+---
+title: "Geomedizin mit R"
+author: "Jan-Philipp Kolb"
+date: "11 Januar 2019"
+output:
+  beamer_presentation: 
+    colortheme: beaver
+    fonttheme: structurebold
+    highlight: espresso
+    keep_tex: yes
+    theme: CambridgeUS
+  slidy_presentation: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r child = 'D:/Daten/GitHub/IntroR/buildingblocks/intror.Rmd'}
+```
+
+
+
+```{r child = 'D:/Daten/GitHub/IntroR/buildingblocks/leaflet_package.Rmd'}
+```

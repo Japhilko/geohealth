@@ -1,5 +1,5 @@
 ---
-title: "A1 Erste Schritte mit R"
+title: "Erste Schritte mit R"
 author: "Jan-Philipp Kolb"
 date: "11 Januar 2019"
 output:
@@ -44,7 +44,7 @@ Normalerweise gibt es große Unterschiede bei Vorkenntnissen und Fähigkeiten - 
 - Verbindung von sozial- mit raumwissenschaftlichen Daten
 
 
-### Warum die Darstellung in Karten
+## Warum die Darstellung in Karten
 
 - Darstellung in Karten ermöglicht besseres Verständnis von sozialwissenschaftlicher Phänomene - Attraktiver Output
 
@@ -69,9 +69,8 @@ Siehe zum Beispiel das Projekt Simulation of Urban MObility (SUMO) (\citealt{beh
 -->
 
 - Quellen für Geodaten
-
-- Bspw. die wichtigsten Programmierschnittstellen (APIs) um die Daten zu bekommen
-
+- Bspw. die wichtigsten ProgVon	Betreff	Erhalten	Größe	Kategorien	
+- Programmierschnittstellen (APIs) um die Daten zu bekommen
 - R-Pakete um diese Daten zu verarbeiten und zu visualisieren
 
 
@@ -116,11 +115,10 @@ library("Rcmdr")
 -->
 
 
-<!--
 ## [**Die Beliebtheit von R-Paketen**](https://gallery.shinyapps.io/cran-gauge/)
 
 ![Downloads vom CRAN Server](figure/CRANdownloads.PNG)
--->
+
 
 ## Download R:
 
@@ -163,7 +161,7 @@ Aus den folgenden Gründen:
 
 ![](figure/RstudioExample.PNG)
 
-## A1A Übung - Vorbereitung
+## Übung - Vorbereitung
 
 - Schaue, ob R auf dem Computer installiert ist
 - Wenn nicht, lade [**R**](r-project.org) herunter und installiere es.
@@ -271,7 +269,7 @@ var(b)
 
 -->
 
-## A1B Übung - Zuweisungen und Funktionen
+## Übung - Zuweisungen und Funktionen
 
 Erstellen Sie einen Vektor `b` mit den Zahlen von 1 bis 5 und berechnen Sie....
 
@@ -333,10 +331,10 @@ library(raster)
 
 ### Weitere interessante Pakete:
 
-- Das Paket `sf` - bietet Zugang zu [**simple features**](https://de.wikipedia.org/wiki/Simple_Feature_Access).
 - Mit dem Paket `leaflet` kann man interaktive Karten erstellen.
-- Das Paket `tmap` kann zur Erstellung von thematischen Karten genutzt werden.
+- Das Paket `tmap` zur Erstellung von thematischen Karten.
 - [**Paket `maptools` um Karten zu erzeugen**](http://www.r-bloggers.com/tag/maptools/)
+- Das Paket `sf` - bietet Zugang zu [**simple features**](https://de.wikipedia.org/wiki/Simple_Feature_Access).
 
 
 ![](figure/logo_sf.PNG)
@@ -412,7 +410,7 @@ install.views("Spatial")
 
 ![](figure/CRANtaskViews.PNG)
 
-## A1C Übung -  zusätzliche Pakete
+## Übung -  zusätzliche Pakete
 
 Geh bspw. auf <https://cran.r-project.org/> und suche nach Paketen...
 
