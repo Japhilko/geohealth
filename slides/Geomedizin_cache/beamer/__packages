@@ -3,3 +3,5 @@ knitr
 magrittr
 leaflet
 tmaptools
+DT
+tmap
