@@ -1,0 +1,16 @@
+---
+title: "Test"
+author: "Jan-Philipp Kolb"
+date: "8 1 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+bui <- "D:/Eigene Dateien/Dokumente/GitHub/IntroR/buildingblocks/shapefiles.Rmd"
+"D:/Daten/GitHub/IntroR/buildingblocks/willkommen.Rmd"
+# https://yihui.name/knitr/demo/child/
+```
+
+```{r child = `r paste(bui)`}
+```
