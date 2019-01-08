@@ -16,27 +16,23 @@ output:
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-```{r child = 'D:/Daten/GitHub/IntroR/buildingblocks/willkommen.Rmd'}
+```{r child = '/../../IntroR/buildingblocks/willkommen.Rmd'}
 ```
 
-```{r child = 'D:/Daten/GitHub/IntroR/buildingblocks/intror.Rmd'}
+```{r child = '/../../IntroR/buildingblocks/intror.Rmd'}
 ```
 
 ## Erste Schritte
 
-```{r child = 'D:/Daten/GitHub/IntroR/buildingblocks/erste_schritte_r.Rmd'}
+```{r child = '/../../IntroR/buildingblocks/erste_schritte_r.Rmd'}
 ```
 
-```{r child = 'D:/Daten/GitHub/IntroR/buildingblocks/hilfe_bekommen.Rmd'}
+```{r child = '/../../IntroR/buildingblocks/hilfe_bekommen.Rmd'}
 ```
 
-```{r child = 'D:/Daten/GitHub/IntroR/buildingblocks/rmodular.Rmd'}
+```{r child = '/../../IntroR/buildingblocks/rmodular.Rmd'}
 ```
 
-```{r child = 'D:/Daten/GitHub/IntroR/buildingblocks/tmap.Rmd'}
-```
-
-
-```{r child = 'D:/Daten/GitHub/IntroR/buildingblocks/leaflet_package.Rmd'}
+```{r child = '/../../IntroR/buildingblocks/leaflet_package.Rmd'}
 ```
 
