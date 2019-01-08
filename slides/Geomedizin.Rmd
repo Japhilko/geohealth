@@ -1,5 +1,5 @@
 ---
-title: "Geomedizin mit R"
+title: "Karten erstellen mit R"
 author: "Jan-Philipp Kolb"
 date: "11 Januar 2019"
 output:
@@ -8,6 +8,7 @@ output:
     fonttheme: structurebold
     highlight: espresso
     keep_tex: yes
+    fig_caption: no
     theme: CambridgeUS
   slidy_presentation: default
 ---
@@ -19,19 +20,42 @@ knitr::opts_chunk$set(echo = FALSE)
 ```{r child = '/../../IntroR/buildingblocks/willkommen.Rmd'}
 ```
 
+# Warum R?
+
 ```{r child = '/../../IntroR/buildingblocks/intror.Rmd'}
 ```
 
-## Erste Schritte
+# Erste Schritte mit R
 
 ```{r child = '/../../IntroR/buildingblocks/erste_schritte_r.Rmd'}
 ```
 
-```{r child = '/../../IntroR/buildingblocks/hilfe_bekommen.Rmd'}
+# Hilfe bekommen
+
+```{r child = '/../../IntroR/buildingblocks/hilfe_geomed.Rmd'}
 ```
+
+# R ist modular
 
 ```{r child = '/../../IntroR/buildingblocks/rmodular.Rmd'}
 ```
+
+# Erste Karten
+
+```{r child = '/../../IntroR/buildingblocks/maptools.Rmd'}
+```
+
+# Geokodierung
+
+```{r child = '/../../IntroR/buildingblocks/geotools.Rmd'}
+```
+
+# Shapefiles bekommen, bearbeiten und visualisieren
+
+```{r child = '/../../IntroR/buildingblocks/shapefiles_geomed.Rmd'}
+```
+
+# Interaktive Karten erstellen
 
 ```{r child = '/../../IntroR/buildingblocks/leaflet_package.Rmd'}
 ```

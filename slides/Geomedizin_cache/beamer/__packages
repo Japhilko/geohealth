@@ -5,3 +5,10 @@ leaflet
 tmaptools
 DT
 tmap
+sp
+maptools
+lattice
+rgdal
+raster
+maps
+mapdata
