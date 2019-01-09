@@ -1,0 +1,27 @@
+---
+title: "tmap package"
+author: "Jan-Philipp Kolb"
+date: "9 1 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 
+
+```{r,eval=F,echo=F}
+library(knitr)
+library(DT)
+DT::datatable(World)
+kable(World)
+```
+
+
+
+
+## [Happy Planet Index](http://happyplanetindex.org/)
+
+
+![](figure/Happy_planet_index.PNG)
