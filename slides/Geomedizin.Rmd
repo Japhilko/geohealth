@@ -87,4 +87,8 @@ https://www.aerzteblatt.de/archiv/81025/Medizinische-Geografie-Der-raeumliche-Bl
 https://de.wikipedia.org/wiki/Medizinische_Geographie
 
 http://docplayer.org/9658463-Geographie-machen-studium-theorie-geomedizin-medizin-leben.html
+
+OpenStreetMap + geohealth + r-project
+
+http://jiscg3.blogspot.com/2011/08/open-geo-health-workshop.html
 -->
