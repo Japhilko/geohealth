@@ -1,8 +1,45 @@
+\PassOptionsToPackage{unicode=true}{hyperref} % options for packages loaded elsewhere
+\PassOptionsToPackage{hyphens}{url}
+%
 \documentclass[ignorenonframetext,]{beamer}
+\usepackage{pgfpages}
 \setbeamertemplate{caption}[numbered]
 \setbeamertemplate{caption label separator}{: }
 \setbeamercolor{caption name}{fg=normal text.fg}
 \beamertemplatenavigationsymbolsempty
+% Prevent slide breaks in the middle of a paragraph:
+\widowpenalties 1 10000
+\raggedbottom
+\setbeamertemplate{part page}{
+\centering
+\begin{beamercolorbox}[sep=16pt,center]{part title}
+  \usebeamerfont{part title}\insertpart\par
+\end{beamercolorbox}
+}
+\setbeamertemplate{section page}{
+\centering
+\begin{beamercolorbox}[sep=12pt,center]{part title}
+  \usebeamerfont{section title}\insertsection\par
+\end{beamercolorbox}
+}
+\setbeamertemplate{subsection page}{
+\centering
+\begin{beamercolorbox}[sep=8pt,center]{part title}
+  \usebeamerfont{subsection title}\insertsubsection\par
+\end{beamercolorbox}
+}
+\AtBeginPart{
+  \frame{\partpage}
+}
+\AtBeginSection{
+  \ifbibliography
+  \else
+    \frame{\sectionpage}
+  \fi
+}
+\AtBeginSubsection{
+  \frame{\subsectionpage}
+}
 \usepackage{lmodern}
 \usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}
@@ -10,12 +47,9 @@
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provides euro and other symbols
 \else % if luatex or xelatex
-  \ifxetex
-    \usepackage{mathspec}
-  \else
-    \usepackage{fontspec}
-  \fi
+  \usepackage{unicode-math}
   \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
 \fi
 \usetheme[]{CambridgeUS}
@@ -25,16 +59,23 @@
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 % use microtype if available
 \IfFileExists{microtype.sty}{%
-\usepackage{microtype}
+\usepackage[]{microtype}
 \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
-\newif\ifbibliography
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\usepackage{hyperref}
 \hypersetup{
             pdftitle={Karten erstellen mit R},
             pdfauthor={Jan-Philipp Kolb},
             pdfborder={0 0 0},
             breaklinks=true}
 \urlstyle{same}  % don't use monospace font for urls
+\newif\ifbibliography
 \usepackage{color}
 \usepackage{fancyvrb}
 \newcommand{\VerbBar}{|}
@@ -44,37 +85,37 @@
 \usepackage{framed}
 \definecolor{shadecolor}{RGB}{42,33,28}
 \newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
-\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.26,0.66,0.93}{\textbf{#1}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,1.00,0.00}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.00,0.40,1.00}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.74,0.68,0.62}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.27,0.67,0.26}{#1}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.74,0.68,0.62}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.02,0.61,0.04}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.00,0.40,1.00}{\textbf{\textit{#1}}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.74,0.68,0.62}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.74,0.68,0.62}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.26,0.66,0.93}{\textbf{#1}}}
 \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.74,0.68,0.62}{\underline{#1}}}
 \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.27,0.67,0.26}{#1}}
-\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.27,0.67,0.26}{#1}}
-\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.27,0.67,0.26}{#1}}
-\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.74,0.68,0.62}{#1}}
-\newcommand{\CharTok}[1]{\textcolor[rgb]{0.02,0.61,0.04}{#1}}
-\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.02,0.61,0.04}{#1}}
-\newcommand{\StringTok}[1]{\textcolor[rgb]{0.02,0.61,0.04}{#1}}
-\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.02,0.61,0.04}{#1}}
-\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.02,0.61,0.04}{#1}}
-\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.74,0.68,0.62}{#1}}
-\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.00,0.40,1.00}{\textit{#1}}}
 \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.00,0.40,1.00}{\textit{#1}}}
-\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.00,0.40,1.00}{\textbf{\textit{#1}}}}
-\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.74,0.68,0.62}{#1}}
-\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.74,0.68,0.62}{#1}}
-\newcommand{\FunctionTok}[1]{\textcolor[rgb]{1.00,0.58,0.35}{\textbf{#1}}}
-\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.74,0.68,0.62}{#1}}
-\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.26,0.66,0.93}{\textbf{#1}}}
-\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.74,0.68,0.62}{#1}}
-\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.74,0.68,0.62}{#1}}
-\newcommand{\ExtensionTok}[1]{\textcolor[rgb]{0.74,0.68,0.62}{#1}}
-\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.68,0.62}{\textbf{#1}}}
-\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.74,0.68,0.62}{#1}}
-\newcommand{\RegionMarkerTok}[1]{\textcolor[rgb]{0.74,0.68,0.62}{#1}}
-\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.00,0.40,1.00}{\textbf{\textit{#1}}}}
-\newcommand{\WarningTok}[1]{\textcolor[rgb]{1.00,1.00,0.00}{\textbf{#1}}}
-\newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,1.00,0.00}{#1}}
 \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,1.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{\textcolor[rgb]{0.74,0.68,0.62}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.27,0.67,0.26}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{1.00,0.58,0.35}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.74,0.68,0.62}{#1}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.00,0.40,1.00}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.26,0.66,0.93}{\textbf{#1}}}
 \newcommand{\NormalTok}[1]{\textcolor[rgb]{0.74,0.68,0.62}{#1}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.74,0.68,0.62}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.74,0.68,0.62}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.68,0.62}{\textbf{#1}}}
+\newcommand{\RegionMarkerTok}[1]{\textcolor[rgb]{0.74,0.68,0.62}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.02,0.61,0.04}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.02,0.61,0.04}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.02,0.61,0.04}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.74,0.68,0.62}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.02,0.61,0.04}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{1.00,1.00,0.00}{\textbf{#1}}}
 \usepackage{longtable,booktabs}
 \usepackage{caption}
 % These lines are needed to make table captions work with longtable:
@@ -84,42 +125,22 @@
 \usepackage{graphicx,grffile}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
-\def\maxheight{\ifdim\Gin@nat@height>\textheight0.8\textheight\else\Gin@nat@height\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
 \makeatother
 % Scale images if necessary, so that they will not overflow the page
 % margins by default, and it is still possible to overwrite the defaults
 % using explicit options in \includegraphics[width, height, ...]{}
 \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
-
-% Prevent slide breaks in the middle of a paragraph:
-\widowpenalties 1 10000
-\raggedbottom
-
-\AtBeginPart{
-  \let\insertpartnumber\relax
-  \let\partname\relax
-  \frame{\partpage}
-}
-\AtBeginSection{
-  \ifbibliography
-  \else
-    \let\insertsectionnumber\relax
-    \let\sectionname\relax
-    \frame{\sectionpage}
-  \fi
-}
-\AtBeginSubsection{
-  \let\insertsubsectionnumber\relax
-  \let\subsectionname\relax
-  \frame{\subsectionpage}
-}
-
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{6pt plus 2pt minus 1pt}
 \setlength{\emergencystretch}{3em}  % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{0}
+
+% set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
 
 \title{Karten erstellen mit R}
 \author{Jan-Philipp Kolb}
@@ -129,6 +150,7 @@
 \frame{\titlepage}
 
 \begin{frame}{Kleine Vorstellungsrunde}
+\protect\hypertarget{kleine-vorstellungsrunde}{}
 
 \begin{itemize}
 \tightlist
@@ -144,6 +166,7 @@
 \end{frame}
 
 \begin{frame}{Disclaimer/ Informationen vorab}
+\protect\hypertarget{disclaimer-informationen-vorab}{}
 
 Normalerweise gibt es große Unterschiede bei Vorkenntnissen und
 Fähigkeiten - bitte gebt Bescheid, wenn es zu schnell oder zu langsam
@@ -168,6 +191,7 @@ geht oder etwas unklar geblieben ist.
 \end{frame}
 
 \begin{frame}{Disclaimer}
+\protect\hypertarget{disclaimer}{}
 
 \begin{itemize}
 \tightlist
@@ -185,9 +209,11 @@ geht oder etwas unklar geblieben ist.
 
 \end{frame}
 
-\section{Warum R?}\label{warum-r}
+\hypertarget{warum-r}{%
+\section{Warum R?}\label{warum-r}}
 
 \begin{frame}{Gründe R zu nutzen\ldots{}}
+\protect\hypertarget{grunde-r-zu-nutzen}{}
 
 \begin{itemize}
 \item
@@ -218,8 +244,9 @@ geht oder etwas unklar geblieben ist.
 
 \begin{frame}{R kann in Kombination mit anderen Programmen genutzt
 werden\ldots{}}
+\protect\hypertarget{r-kann-in-kombination-mit-anderen-programmen-genutzt-werden}{}
 
-\includegraphics{D:/Daten/GitHub/IntroR/buildingblocks/figure/Rinterfaces.PNG}
+\includegraphics{D:/GitHub/IntroR/buildingblocks/figure/Rinterfaces.PNG}
 
 \begin{itemize}
 \tightlist
@@ -236,30 +263,34 @@ werden\ldots{}}
 
 \begin{frame}{\href{https://gallery.shinyapps.io/cran-gauge/}{\textbf{Die
 Beliebtheit von R-Paketen}}}
+\protect\hypertarget{die-beliebtheit-von-r-paketen}{}
 
-\includegraphics{D:/Daten/GitHub/IntroR/buildingblocks/figure/CRANdownloads.PNG}
+\includegraphics{D:/GitHub/IntroR/buildingblocks/figure/CRANdownloads.PNG}
 
 \end{frame}
 
 \begin{frame}{Download R:}
+\protect\hypertarget{download-r}{}
 
 \url{http://www.r-project.org/}
 
-\includegraphics{D:/Daten/GitHub/IntroR/buildingblocks/figure/CRAN1picture.PNG}
+\includegraphics{D:/GitHub/IntroR/buildingblocks/figure/CRAN1picture.PNG}
 
 \end{frame}
 
 \begin{frame}{Open Source Programm R}
+\protect\hypertarget{open-source-programm-r}{}
 
 \begin{block}{Das ist das Basis-R:}
 
-\includegraphics{D:/Daten/GitHub/IntroR/buildingblocks/figure/BasisR.PNG}
+\includegraphics{D:/GitHub/IntroR/buildingblocks/figure/BasisR.PNG}
 
 \end{block}
 
 \end{frame}
 
 \begin{frame}{Graphical user interface}
+\protect\hypertarget{graphical-user-interface}{}
 
 Viele Leute nutzen ein
 \href{https://en.wikipedia.org/wiki/Graphical_user_interface}{\textbf{Graphical
@@ -282,12 +313,14 @@ Aus den folgenden Gründen:
 \end{frame}
 
 \begin{frame}{RStudio}
+\protect\hypertarget{rstudio}{}
 
-\includegraphics{D:/Daten/GitHub/IntroR/buildingblocks/figure/RstudioExample.PNG}
+\includegraphics{D:/GitHub/IntroR/buildingblocks/figure/RstudioExample.PNG}
 
 \end{frame}
 
 \begin{frame}[fragile]{Übung - Vorbereitung}
+\protect\hypertarget{ubung---vorbereitung}{}
 
 \begin{itemize}
 \item
@@ -312,9 +345,11 @@ Aus den folgenden Gründen:
 
 \end{frame}
 
-\section{Erste Schritte mit R}\label{erste-schritte-mit-r}
+\hypertarget{erste-schritte-mit-r}{%
+\section{Erste Schritte mit R}\label{erste-schritte-mit-r}}
 
 \begin{frame}[fragile]{R ist eine objektorientierte Sprache.}
+\protect\hypertarget{r-ist-eine-objektorientierte-sprache.}{}
 
 \begin{block}{Vektoren und Zuweisungen}
 
@@ -378,12 +413,12 @@ Objekts erfahren:
 \end{frame}
 
 \begin{frame}[fragile]{Übung - Zuweisungen und Funktionen}
+\protect\hypertarget{ubung---zuweisungen-und-funktionen}{}
 
 Erstellen Sie einen Vektor \texttt{b} mit den Zahlen von 1 bis 5 und
 berechnen Sie\ldots{}.
 
 \begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
 \item
   den Mittelwert
 \item
@@ -396,9 +431,11 @@ berechnen Sie\ldots{}.
 
 \end{frame}
 
-\section{Hilfe bekommen}\label{hilfe-bekommen}
+\hypertarget{hilfe-bekommen}{%
+\section{Hilfe bekommen}\label{hilfe-bekommen}}
 
 \begin{frame}[fragile]{Wie bekomme ich Hilfe?}
+\protect\hypertarget{wie-bekomme-ich-hilfe}{}
 
 \begin{itemize}
 \tightlist
@@ -453,6 +490,7 @@ berechnen Sie\ldots{}.
 \end{frame}
 
 \begin{frame}[fragile]{Vignetten}
+\protect\hypertarget{vignetten}{}
 
 \begin{itemize}
 \tightlist
@@ -488,12 +526,14 @@ berechnen Sie\ldots{}.
 
 \begin{frame}{Ein Beispiel für eine Vignette - Das Paket
 \texttt{osmdata}}
+\protect\hypertarget{ein-beispiel-fur-eine-vignette---das-paket-osmdata}{}
 
-\includegraphics{D:/Daten/GitHub/IntroR/buildingblocks/figure/ex_osmdata_vignette.PNG}
+\includegraphics{D:/GitHub/IntroR/buildingblocks/figure/ex_osmdata_vignette.PNG}
 
 \end{frame}
 
 \begin{frame}[fragile]{\href{http://r-pkgs.had.co.nz/demo.html}{\textbf{Demos}}}
+\protect\hypertarget{demos}{}
 
 \begin{itemize}
 \tightlist
@@ -524,11 +564,12 @@ berechnen Sie\ldots{}.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{D:/Daten/GitHub/IntroR/buildingblocks/figure/demonlm.PNG}
+\includegraphics{D:/GitHub/IntroR/buildingblocks/figure/demonlm.PNG}
 
 \end{frame}
 
 \begin{frame}[fragile]{Die Funktion \texttt{apropos}}
+\protect\hypertarget{die-funktion-apropos}{}
 
 \begin{itemize}
 \tightlist
@@ -585,6 +626,7 @@ berechnen Sie\ldots{}.
 
 \begin{frame}[fragile]{\href{http://search.r-project.org/cgi-bin/namazu.cgi?query=glm\&max=20\&result=normal\&sort=score\&idxname=functions\&idxname=vignettes\&idxname=views}{\textbf{Suchmaschine
 für die R-Seite}}}
+\protect\hypertarget{suchmaschine-fur-die-r-seite}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -592,11 +634,12 @@ für die R-Seite}}}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{D:/Daten/GitHub/IntroR/buildingblocks/figure/rsitesearch.PNG}
+\includegraphics{D:/GitHub/IntroR/buildingblocks/figure/rsitesearch.PNG}
 
 \end{frame}
 
 \begin{frame}[fragile]{Nutzung von Suchmaschinen}
+\protect\hypertarget{nutzung-von-suchmaschinen}{}
 
 \begin{itemize}
 \tightlist
@@ -614,11 +657,12 @@ R-project + "was ich schon immer wissen wollte"
   das funktioniert natürlich für alle Suchmaschinen!
 \end{itemize}
 
-\includegraphics{D:/Daten/GitHub/IntroR/buildingblocks/figure/duckduckgo.PNG}
+\includegraphics{D:/GitHub/IntroR/buildingblocks/figure/duckduckgo.PNG}
 
 \end{frame}
 
 \begin{frame}{\href{http://stackoverflow.com/}{\textbf{Stackoverflow}}}
+\protect\hypertarget{stackoverflow}{}
 
 \begin{itemize}
 \tightlist
@@ -632,26 +676,29 @@ R-project + "was ich schon immer wissen wollte"
   Sehr detailierte Diskussionen
 \end{itemize}
 
-\includegraphics{D:/Daten/GitHub/IntroR/buildingblocks/figure/StackoverflowEx.PNG}
+\includegraphics{D:/GitHub/IntroR/buildingblocks/figure/StackoverflowEx.PNG}
 
 \end{frame}
 
 \begin{frame}{Ein Schummelzettel für Basis R}
+\protect\hypertarget{ein-schummelzettel-fur-basis-r}{}
 
 \url{https://www.rstudio.com/resources/cheatsheets/}
 
-\includegraphics{D:/Daten/GitHub/IntroR/buildingblocks/figure/basercheatsheet.PNG}
+\includegraphics{D:/GitHub/IntroR/buildingblocks/figure/basercheatsheet.PNG}
 
 \end{frame}
 
 \begin{frame}{Mehr Schummelzettel}
+\protect\hypertarget{mehr-schummelzettel}{}
 
-\includegraphics{D:/Daten/GitHub/IntroR/buildingblocks/figure/cheatsheets.PNG}
+\includegraphics{D:/GitHub/IntroR/buildingblocks/figure/cheatsheets.PNG}
 
 \end{frame}
 
 \begin{frame}{\href{http://www.statmethods.net/interface/help.html}{\textbf{Quick
 R}}}
+\protect\hypertarget{quick-r}{}
 
 \begin{itemize}
 \tightlist
@@ -663,11 +710,12 @@ R}}}
   - Getting Help}}
 \end{itemize}
 
-\includegraphics{D:/Daten/GitHub/IntroR/buildingblocks/figure/quickR.PNG}
+\includegraphics{D:/GitHub/IntroR/buildingblocks/figure/quickR.PNG}
 
 \end{frame}
 
 \begin{frame}{Weitere Links}
+\protect\hypertarget{weitere-links}{}
 
 \begin{itemize}
 \tightlist
@@ -676,7 +724,7 @@ R}}}
   bekommt man Hilfe in R}}
 \end{itemize}
 
-\includegraphics{D:/Daten/GitHub/IntroR/buildingblocks/figure/gettingHelp.PNG}
+\includegraphics{D:/GitHub/IntroR/buildingblocks/figure/gettingHelp.PNG}
 
 \begin{itemize}
 \item
@@ -688,10 +736,12 @@ R}}}
 
 \end{frame}
 
-\section{R ist modular}\label{r-ist-modular}
+\hypertarget{r-ist-modular}{%
+\section{R ist modular}\label{r-ist-modular}}
 
 \begin{frame}{\href{https://stats.idre.ucla.edu/r/seminars/intro/}{\textbf{Wo
 man Routinen findet}}}
+\protect\hypertarget{wo-man-routinen-findet}{}
 
 \begin{itemize}
 \tightlist
@@ -704,7 +754,7 @@ man Routinen findet}}}
   R kann modular durch sogenannte Pakete oder Bibliotheken erweitert
   werden.
 \item
-  Die wichtigsten Pakete, die auf CRAN gehostet werden (13610 at Di 08
+  Die wichtigsten Pakete, die auf CRAN gehostet werden (13640 at Do 10
   Jan 2019)
 \item
   Weitere Pakete findet man z.B. unter
@@ -715,12 +765,14 @@ man Routinen findet}}}
 
 \begin{frame}{\href{https://www.youtube.com/watch?v=kKI9--Opmso}{Übersicht
 R-Pakete}}
+\protect\hypertarget{ubersicht-r-pakete}{}
 
 \includegraphics{figure/packages_overview.PNG}
 
 \end{frame}
 
 \begin{frame}[fragile]{Installation von Paketen}
+\protect\hypertarget{installation-von-paketen}{}
 
 \begin{itemize}
 \tightlist
@@ -745,18 +797,21 @@ R-Pakete}}
 \end{frame}
 
 \begin{frame}{Installation von Paketen mit RStudio}
+\protect\hypertarget{installation-von-paketen-mit-rstudio}{}
 
 \includegraphics{figure/PaketeRstudio.PNG}
 
 \end{frame}
 
 \begin{frame}{Bestehende Pakete und Installation}
+\protect\hypertarget{bestehende-pakete-und-installation}{}
 
 \includegraphics{figure/packages3.PNG}
 
 \end{frame}
 
 \begin{frame}[fragile]{Übersicht Pakete:}
+\protect\hypertarget{ubersicht-pakete}{}
 
 \begin{itemize}
 \tightlist
@@ -782,6 +837,7 @@ R-Pakete}}
 \end{frame}
 
 \begin{frame}[fragile]{Pakete aus verschiedenen Quellen installieren}
+\protect\hypertarget{pakete-aus-verschiedenen-quellen-installieren}{}
 
 \begin{block}{Pakete vom CRAN Server installieren}
 
@@ -820,6 +876,7 @@ R-Pakete}}
 \end{frame}
 
 \begin{frame}{Wie bekomme ich einen Überblick?}
+\protect\hypertarget{wie-bekomme-ich-einen-uberblick}{}
 
 \begin{itemize}
 \item
@@ -847,6 +904,7 @@ R-Pakete}}
 \end{frame}
 
 \begin{frame}[fragile]{CRAN Task Views}
+\protect\hypertarget{cran-task-views}{}
 
 \begin{itemize}
 \tightlist
@@ -875,6 +933,7 @@ R-Pakete}}
 \end{frame}
 
 \begin{frame}{Übung - zusätzliche Pakete}
+\protect\hypertarget{ubung---zusatzliche-pakete}{}
 
 Geh bspw. auf \url{https://cran.r-project.org/} und suche nach
 Paketen\ldots{}
@@ -893,9 +952,11 @@ Paketen\ldots{}
 
 \end{frame}
 
-\section{Erste Karten}\label{erste-karten}
+\hypertarget{erste-karten}{%
+\section{Erste Karten}\label{erste-karten}}
 
 \begin{frame}[fragile]{Das Paket maptools}
+\protect\hypertarget{das-paket-maptools}{}
 
 \begin{itemize}
 \tightlist
@@ -928,6 +989,7 @@ ALB & AL & AL & ALB & 8 & Albania\tabularnewline
 \end{frame}
 
 \begin{frame}[fragile]{Hello world}
+\protect\hypertarget{hello-world}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -936,11 +998,12 @@ ALB & AL & AL & ALB & 8 & Albania\tabularnewline
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-47-1.pdf}
+\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-62-1.pdf}
 
 \end{frame}
 
 \begin{frame}[fragile]{Der shapefile}
+\protect\hypertarget{der-shapefile}{}
 
 \begin{itemize}
 \tightlist
@@ -971,6 +1034,7 @@ ALB & AL & AL & ALB & 8 & Albania\tabularnewline
 \end{frame}
 
 \begin{frame}[fragile]{Der Datensatz}
+\protect\hypertarget{der-datensatz}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -993,6 +1057,7 @@ ALB & AL & AL & ALB & 8 & Albania\tabularnewline
 \end{frame}
 
 \begin{frame}[fragile]{Die Struktur der Daten}
+\protect\hypertarget{die-struktur-der-daten}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1030,6 +1095,7 @@ ALB & AL & AL & ALB & 8 & Albania\tabularnewline
 \end{frame}
 
 \begin{frame}[fragile]{Eine logische Abfrage}
+\protect\hypertarget{eine-logische-abfrage}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1057,6 +1123,7 @@ ALB & AL & AL & ALB & 8 & Albania\tabularnewline
 \end{frame}
 
 \begin{frame}[fragile]{Eine Karte für Süd Afrika}
+\protect\hypertarget{eine-karte-fur-sud-afrika}{}
 
 \begin{itemize}
 \tightlist
@@ -1071,11 +1138,12 @@ ALB & AL & AL & ALB & 8 & Albania\tabularnewline
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-56-1.pdf}
+\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-71-1.pdf}
 
 \end{frame}
 
 \begin{frame}[fragile]{Mehr als ein Land zeichnen}
+\protect\hypertarget{mehr-als-ein-land-zeichnen}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1086,11 +1154,12 @@ ALB & AL & AL & ALB & 8 & Albania\tabularnewline
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-57-1.pdf}
+\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-72-1.pdf}
 
 \end{frame}
 
 \begin{frame}[fragile]{Mehr Farbe}
+\protect\hypertarget{mehr-farbe}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1099,11 +1168,12 @@ ALB & AL & AL & ALB & 8 & Albania\tabularnewline
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-58-1.pdf}
+\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-73-1.pdf}
 
 \end{frame}
 
 \begin{frame}[fragile]{Mehr Farbe für die Welt}
+\protect\hypertarget{mehr-farbe-fur-die-welt}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1112,11 +1182,12 @@ ALB & AL & AL & ALB & 8 & Albania\tabularnewline
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-59-1.pdf}
+\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-74-1.pdf}
 
 \end{frame}
 
 \begin{frame}[fragile]{Eine Karte für Europa}
+\protect\hypertarget{eine-karte-fur-europa}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1125,11 +1196,12 @@ ALB & AL & AL & ALB & 8 & Albania\tabularnewline
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-60-1.pdf}
+\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-75-1.pdf}
 
 \end{frame}
 
 \begin{frame}[fragile]{Europa ohne Russland}
+\protect\hypertarget{europa-ohne-russland}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1139,11 +1211,12 @@ ALB & AL & AL & ALB & 8 & Albania\tabularnewline
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-61-1.pdf}
+\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-76-1.pdf}
 
 \end{frame}
 
 \begin{frame}[fragile]{Spielen Sie mit Farben}
+\protect\hypertarget{spielen-sie-mit-farben}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1152,7 +1225,7 @@ ALB & AL & AL & ALB & 8 & Albania\tabularnewline
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-62-1.pdf}
+\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-77-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1162,11 +1235,12 @@ ALB & AL & AL & ALB & 8 & Albania\tabularnewline
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-62-2.pdf}
+\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-77-2.pdf}
 
 \end{frame}
 
 \begin{frame}[fragile]{Mehr über Farben}
+\protect\hypertarget{mehr-uber-farben}{}
 
 \href{http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf}{Colors in
 R}
@@ -1178,11 +1252,12 @@ R}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-63-1.pdf}
+\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-78-1.pdf}
 
 \end{frame}
 
 \begin{frame}[fragile]{Europa - Farbschattierung blau}
+\protect\hypertarget{europa---farbschattierung-blau}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1191,11 +1266,12 @@ R}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-64-1.pdf}
+\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-79-1.pdf}
 
 \end{frame}
 
 \begin{frame}[fragile]{Europa - Farbschattierung rot}
+\protect\hypertarget{europa---farbschattierung-rot}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1204,11 +1280,12 @@ R}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-65-1.pdf}
+\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-80-1.pdf}
 
 \end{frame}
 
 \begin{frame}[fragile]{Europa - Farbschattierung grün}
+\protect\hypertarget{europa---farbschattierung-grun}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1217,11 +1294,12 @@ R}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-66-1.pdf}
+\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-81-1.pdf}
 
 \end{frame}
 
 \begin{frame}[fragile]{Europa - Farbschattierung grau}
+\protect\hypertarget{europa---farbschattierung-grau}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1230,11 +1308,12 @@ R}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-67-1.pdf}
+\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-82-1.pdf}
 
 \end{frame}
 
 \begin{frame}[fragile]{Europa - zwei Graphiken nebeneinander}
+\protect\hypertarget{europa---zwei-graphiken-nebeneinander}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1244,11 +1323,12 @@ R}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-68-1.pdf}
+\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-83-1.pdf}
 
 \end{frame}
 
 \begin{frame}[fragile]{Europa - Punkte hinzufügen}
+\protect\hypertarget{europa---punkte-hinzufugen}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1267,11 +1347,12 @@ R}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-69-1.pdf}
+\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-84-1.pdf}
 
 \end{frame}
 
 \begin{frame}[fragile]{Europa - Blasen hinzufügen}
+\protect\hypertarget{europa---blasen-hinzufugen}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1283,11 +1364,12 @@ R}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-70-1.pdf}
+\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-85-1.pdf}
 
 \end{frame}
 
 \begin{frame}[fragile]{Europa - Text hinzufügen}
+\protect\hypertarget{europa---text-hinzufugen}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1296,11 +1378,12 @@ R}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-71-1.pdf}
+\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-86-1.pdf}
 
 \end{frame}
 
 \begin{frame}[fragile]{Europa - Linien hinzufügen}
+\protect\hypertarget{europa---linien-hinzufugen}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1317,13 +1400,15 @@ R}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-73-1.pdf}
+\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-88-1.pdf}
 
 \end{frame}
 
-\section{Geokodierung}\label{geokodierung}
+\hypertarget{geokodierung}{%
+\section{Geokodierung}\label{geokodierung}}
 
 \begin{frame}{Geokodierung}
+\protect\hypertarget{geokodierung-1}{}
 
 \begin{block}{\href{https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet\#blockquotes}{Wikipedia
 - Geocoding}}
@@ -1339,12 +1424,14 @@ spatial reference data \ldots{}
 \end{frame}
 
 \begin{frame}{Latitude und Longitude}
+\protect\hypertarget{latitude-und-longitude}{}
 
-\includegraphics{D:/Daten/GitHub/IntroR/buildingblocks/figure/definition-of-latitude-longitude.jpg}
+\includegraphics{D:/GitHub/IntroR/buildingblocks/figure/definition-of-latitude-longitude.jpg}
 
 \end{frame}
 
 \begin{frame}[fragile]{Geokodierung mit dem Paket \texttt{tmaptools}}
+\protect\hypertarget{geokodierung-mit-dem-paket-tmaptools}{}
 
 \begin{itemize}
 \tightlist
@@ -1371,6 +1458,7 @@ spatial reference data \ldots{}
 \end{frame}
 
 \begin{frame}[fragile]{Der Geocode für Schwäbisch-Gmünd}
+\protect\hypertarget{der-geocode-fur-schwabisch-gmund}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1394,6 +1482,7 @@ spatial reference data \ldots{}
 \end{frame}
 
 \begin{frame}{Reverse Geokodierung}
+\protect\hypertarget{reverse-geokodierung}{}
 
 \begin{quote}
 Reverse geocoding is the process of back (reverse) coding of a point
@@ -1407,10 +1496,35 @@ Quelle:
 
 \end{frame}
 
+\begin{frame}[fragile]{Eine Karte für einen bestimmten Ort bekommen}
+\protect\hypertarget{eine-karte-fur-einen-bestimmten-ort-bekommen}{}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(}\StringTok{"OpenStreetMap"}\NormalTok{)}
+
+\NormalTok{map <-}\StringTok{ }\KeywordTok{openmap}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\FloatTok{48.791510}\NormalTok{,}\FloatTok{9.809462}\NormalTok{),}
+               \KeywordTok{c}\NormalTok{(}\FloatTok{48.801510}\NormalTok{,}\FloatTok{9.829462}\NormalTok{),}
+               \DataTypeTok{type=}\StringTok{"osm"}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(map)}
+\end{Highlighting}
+\end{Shaded}
+
+\end{frame}
+
+\begin{frame}{Die Karte für Schwäbisch Gmünd}
+\protect\hypertarget{die-karte-fur-schwabisch-gmund}{}
+
+\includegraphics{figure/PH_SG.pdf}
+
+\end{frame}
+
+\hypertarget{shapefiles-bekommen-bearbeiten-und-visualisieren}{%
 \section{Shapefiles bekommen, bearbeiten und
-visualisieren}\label{shapefiles-bekommen-bearbeiten-und-visualisieren}
+visualisieren}\label{shapefiles-bekommen-bearbeiten-und-visualisieren}}
 
 \begin{frame}[fragile]{Worum geht es in diesem Abschnitt}
+\protect\hypertarget{worum-geht-es-in-diesem-abschnitt}{}
 
 \begin{itemize}
 \tightlist
@@ -1428,12 +1542,14 @@ visualisieren}\label{shapefiles-bekommen-bearbeiten-und-visualisieren}
 \end{frame}
 
 \begin{frame}{Ein kleines Quizz}
+\protect\hypertarget{ein-kleines-quizz}{}
 
-\includegraphics{D:/Daten/GitHub/IntroR/buildingblocks/figure/quizz.PNG}
+\includegraphics{D:/GitHub/IntroR/buildingblocks/figure/quizz.PNG}
 
 \end{frame}
 
 \begin{frame}{Das shapefile Format \ldots{}}
+\protect\hypertarget{das-shapefile-format}{}
 
 \begin{itemize}
 \item
@@ -1461,6 +1577,7 @@ Quelle: \url{https://en.wikipedia.org/wiki/Shapefile}
 \end{frame}
 
 \begin{frame}{Der R Befehl readShapePoly}
+\protect\hypertarget{der-r-befehl-readshapepoly}{}
 
 Um Shape-Dateien zu lesen, ist es notwendig, die drei Dateien mit den
 folgenden Dateierweiterungen im gleichen Verzeichnis zu haben:
@@ -1479,6 +1596,7 @@ folgenden Dateierweiterungen im gleichen Verzeichnis zu haben:
 
 \begin{frame}[fragile]{\href{http://www.bundesnetzagentur.de/SharedDocs/Downloads/DE/Sachgebiete/Telekommunikation/Unternehmen_Institutionen/Nummerierung/Rufnummern/ONVerzeichnisse/ONBGrenzen/ONB_Grenzen.html}{\textbf{Vorwahlbereiche
 in Deutschland}}}
+\protect\hypertarget{vorwahlbereiche-in-deutschland}{}
 
 \begin{block}{Quelle Ortsnetzbereiche:
 \href{https://www.bundesnetzagentur.de/DE/Sachgebiete/Telekommunikation/Unternehmen_Institutionen/Nummerierung/Rufnummern/ONRufnr/ON_Einteilung_ONB/ON_ONB_ONKz_ONBGrenzen_Basepage.html}{\textbf{Bundesnetzagentur}}}
@@ -1504,6 +1622,7 @@ in Deutschland}}}
 \end{frame}
 
 \begin{frame}[fragile]{Die Karte zeichnen}
+\protect\hypertarget{die-karte-zeichnen}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1511,11 +1630,12 @@ in Deutschland}}}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{D:/Daten/GitHub/IntroR/buildingblocks/figure/ONB_bereiche.PNG}
+\includegraphics{D:/GitHub/IntroR/buildingblocks/figure/ONB_bereiche.PNG}
 
 \end{frame}
 
 \begin{frame}[fragile]{Der Datenslot}
+\protect\hypertarget{der-datenslot}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1523,23 +1643,10 @@ in Deutschland}}}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{longtable}[]{@{}llll@{}}
-\toprule
-& VORWAHL & NAME & KENNUNG\tabularnewline
-\midrule
-\endhead
-0 & 04651 & Sylt & NA\tabularnewline
-1 & 04668 & Klanxbüll & NA\tabularnewline
-2 & 04664 & Neukirchen b Niebüll & NA\tabularnewline
-3 & 04663 & Süderlügum & NA\tabularnewline
-4 & 04666 & Ladelund & NA\tabularnewline
-5 & 04631 & Glücksburg Ostsee & NA\tabularnewline
-\bottomrule
-\end{longtable}
-
 \end{frame}
 
 \begin{frame}[fragile]{Einen Vorwahlbereich ausschneiden}
+\protect\hypertarget{einen-vorwahlbereich-ausschneiden}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1556,11 +1663,10 @@ in Deutschland}}}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-86-1.pdf}
-
 \end{frame}
 
 \begin{frame}[fragile]{Vorwahlbereich ausschneiden}
+\protect\hypertarget{vorwahlbereich-ausschneiden}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1569,11 +1675,10 @@ in Deutschland}}}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-87-1.pdf}
-
 \end{frame}
 
 \begin{frame}[fragile]{Shapefiles zusammenfassen}
+\protect\hypertarget{shapefiles-zusammenfassen}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1583,11 +1688,10 @@ in Deutschland}}}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-88-1.pdf}
-
 \end{frame}
 
 \begin{frame}[fragile]{Wo ist Mannheim?}
+\protect\hypertarget{wo-ist-mannheim}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1599,22 +1703,22 @@ in Deutschland}}}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-89-1.pdf}
-
 \end{frame}
 
 \begin{frame}{Shapefiles für PLZ-Bereiche}
+\protect\hypertarget{shapefiles-fur-plz-bereiche}{}
 
 \begin{block}{\href{http://arnulf.us/PLZ}{\textbf{Quelle}} für PLZ
 Shapefiles}
 
-\includegraphics{D:/Daten/GitHub/IntroR/buildingblocks/figure/Download_plz.PNG}
+\includegraphics{D:/GitHub/IntroR/buildingblocks/figure/Download_plz.PNG}
 
 \end{block}
 
 \end{frame}
 
 \begin{frame}[fragile]{Paket \texttt{rgdal} - PLZ Datensatz einlesen}
+\protect\hypertarget{paket-rgdal---plz-datensatz-einlesen}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1629,9 +1733,16 @@ Shapefiles}
 \end{Highlighting}
 \end{Shaded}
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{setwd}\NormalTok{(}\StringTok{"D:/GESIS/data"}\NormalTok{)}
+\NormalTok{plz <-}\StringTok{ }\KeywordTok{readOGR}\NormalTok{ (}\StringTok{"post_pl.shp"}\NormalTok{,}\StringTok{"post_pl"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
 \begin{verbatim}
 ## OGR data source with driver: ESRI Shapefile 
-## Source: "D:\Daten\Daten\GeoDaten\post_pl.shp", layer: "post_pl"
+## Source: "D:\GESIS\data\post_pl.shp", layer: "post_pl"
 ## with 8270 features
 ## It has 3 fields
 \end{verbatim}
@@ -1639,6 +1750,7 @@ Shapefiles}
 \end{frame}
 
 \begin{frame}[fragile]{Die Daten plotten}
+\protect\hypertarget{die-daten-plotten}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1647,11 +1759,12 @@ Shapefiles}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-94-1.pdf}
+\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-117-1.pdf}
 
 \end{frame}
 
 \begin{frame}[fragile]{Die Grenze von Mannheim}
+\protect\hypertarget{die-grenze-von-mannheim}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1660,11 +1773,12 @@ Shapefiles}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-95-1.pdf}
+\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-118-1.pdf}
 
 \end{frame}
 
 \begin{frame}[fragile]{Die PLZ-Bereiche von Mannheim zusammenfassen}
+\protect\hypertarget{die-plz-bereiche-von-mannheim-zusammenfassen}{}
 
 \begin{itemize}
 \tightlist
@@ -1682,11 +1796,12 @@ Shapefiles}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-96-1.pdf}
+\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-119-1.pdf}
 
 \end{frame}
 
 \begin{frame}[fragile]{Exkurs: der Befehl \texttt{agrep}}
+\protect\hypertarget{exkurs-der-befehl-agrep}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1717,6 +1832,7 @@ Shapefiles}
 \end{frame}
 
 \begin{frame}[fragile]{Die Funktion \texttt{grep}}
+\protect\hypertarget{die-funktion-grep}{}
 
 \begin{block}{Der exakte match}
 
@@ -1758,6 +1874,7 @@ Shapefiles}
 \end{frame}
 
 \begin{frame}[fragile]{Aufgabe: PLZ Bereiche herunterladen}
+\protect\hypertarget{aufgabe-plz-bereiche-herunterladen}{}
 
 \begin{itemize}
 \tightlist
@@ -1776,6 +1893,7 @@ Shapefiles}
 
 \begin{frame}[fragile]{Global Adminastrative Boundaries -
 \href{http://www.gadm.org/}{GADM} - NUTS level 1}
+\protect\hypertarget{global-adminastrative-boundaries---gadm---nuts-level-1}{}
 
 \begin{itemize}
 \tightlist
@@ -1795,11 +1913,12 @@ Shapefiles}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-103-1.pdf}
+\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-126-1.pdf}
 
 \end{frame}
 
 \begin{frame}[fragile]{Ein Blick auf die Daten}
+\protect\hypertarget{ein-blick-auf-die-daten}{}
 
 Koordinaten im polygon slot
 
@@ -1822,6 +1941,7 @@ Koordinaten im polygon slot
 \end{frame}
 
 \begin{frame}[fragile]{Der Datenslot}
+\protect\hypertarget{der-datenslot-1}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1843,6 +1963,7 @@ Koordinaten im polygon slot
 \end{frame}
 
 \begin{frame}[fragile]{\href{http://www.gadm.org/}{GADM}- NUTS level 3}
+\protect\hypertarget{gadm--nuts-level-3}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1856,6 +1977,7 @@ Koordinaten im polygon slot
 \end{frame}
 
 \begin{frame}[fragile]{\href{http://www.gadm.org/}{GADM}- NUTS level 4}
+\protect\hypertarget{gadm--nuts-level-4}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1869,6 +1991,7 @@ Koordinaten im polygon slot
 \end{frame}
 
 \begin{frame}[fragile]{\href{http://www.gadm.org/}{GADM}- NUTS level 3}
+\protect\hypertarget{gadm--nuts-level-3-1}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1877,11 +2000,12 @@ Koordinaten im polygon slot
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{D:/Daten/GitHub/IntroR/buildingblocks/figure/DEU3.png}
+\includegraphics{D:/GitHub/IntroR/buildingblocks/figure/DEU3.png}
 
 \end{frame}
 
 \begin{frame}[fragile]{Gemeinden in Deutschland}
+\protect\hypertarget{gemeinden-in-deutschland}{}
 
 \href{http://www.geodatenzentrum.de/geodaten/gdz_rahmen.gdz_div?gdz_spr=deu\&gdz_akt_zeile=5\&gdz_anz_zeile=1\&gdz_unt_zeile=15\&gdz_user_id=0}{Bundesamt
 für Kartographie und Geodäsie (BKG)}
@@ -1893,11 +2017,12 @@ für Kartographie und Geodäsie (BKG)}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{D:/Daten/GitHub/IntroR/buildingblocks/figure/vg250_krs.png}
+\includegraphics{D:/GitHub/IntroR/buildingblocks/figure/vg250_krs.png}
 
 \end{frame}
 
 \begin{frame}{Aufgabe: Download von Shapefiles für die Schweiz}
+\protect\hypertarget{aufgabe-download-von-shapefiles-fur-die-schweiz}{}
 
 \begin{itemize}
 \tightlist
@@ -1910,6 +2035,7 @@ für Kartographie und Geodäsie (BKG)}
 \end{frame}
 
 \begin{frame}[fragile]{Kreise eines Bundeslandes}
+\protect\hypertarget{kreise-eines-bundeslandes}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1918,11 +2044,12 @@ für Kartographie und Geodäsie (BKG)}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{D:/Daten/GitHub/IntroR/buildingblocks/figure/KreiseNRW.png}
+\includegraphics{D:/GitHub/IntroR/buildingblocks/figure/KreiseNRW.png}
 
 \end{frame}
 
 \begin{frame}[fragile]{Das Paket \texttt{maps} - Mehr Information}
+\protect\hypertarget{das-paket-maps---mehr-information}{}
 
 \begin{itemize}
 \tightlist
@@ -1941,11 +2068,12 @@ für Kartographie und Geodäsie (BKG)}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-119-1.pdf}
+\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-142-1.pdf}
 
 \end{frame}
 
 \begin{frame}[fragile]{Das Rstudio Addin \texttt{colourpicker}}
+\protect\hypertarget{das-rstudio-addin-colourpicker}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1953,20 +2081,22 @@ für Kartographie und Geodäsie (BKG)}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{D:/Daten/GitHub/IntroR/buildingblocks/figure/colourpicker.PNG}
+\includegraphics{D:/GitHub/IntroR/buildingblocks/figure/colourpicker.PNG}
 
 \end{frame}
 
 \begin{frame}{Weitere Quelle -
 \href{https://www.bundeswahlleiter.de/bundestagswahlen/2017/wahlkreiseinteilung/downloads.html}{Shapefiles
 für Wahlkreise}}
+\protect\hypertarget{weitere-quelle---shapefiles-fur-wahlkreise}{}
 
-\includegraphics{D:/Daten/GitHub/IntroR/buildingblocks/figure/shapefiles_btw.PNG}
+\includegraphics{D:/GitHub/IntroR/buildingblocks/figure/shapefiles_btw.PNG}
 
 \end{frame}
 
 \begin{frame}{\href{http://ec.europa.eu/eurostat/de/web/gisco/geodata/reference-data/administrative-units-statistical-units}{Shapefiles
 bei Eurostat}}
+\protect\hypertarget{shapefiles-bei-eurostat}{}
 
 \begin{itemize}
 \tightlist
@@ -1975,11 +2105,12 @@ bei Eurostat}}
   Karten}} - in der Regel die Europäischen Mitgliedsstaaten
 \end{itemize}
 
-\includegraphics{D:/Daten/GitHub/IntroR/buildingblocks/figure/Eurostat_Zensus.PNG}
+\includegraphics{D:/GitHub/IntroR/buildingblocks/figure/Eurostat_Zensus.PNG}
 
 \end{frame}
 
 \begin{frame}{Weitere Quellen für Shapefiles}
+\protect\hypertarget{weitere-quellen-fur-shapefiles}{}
 
 \begin{itemize}
 \tightlist
@@ -1988,7 +2119,7 @@ bei Eurostat}}
   linked data}} - Ordnance Survey (GB)
 \end{itemize}
 
-\includegraphics{D:/Daten/GitHub/IntroR/buildingblocks/figure/OpenLinkedData.PNG}
+\includegraphics{D:/GitHub/IntroR/buildingblocks/figure/OpenLinkedData.PNG}
 
 \begin{itemize}
 \item
@@ -2008,10 +2139,12 @@ bei Eurostat}}
 
 \end{frame}
 
+\hypertarget{interaktive-karten-erstellen}{%
 \section{Interaktive Karten
-erstellen}\label{interaktive-karten-erstellen}
+erstellen}\label{interaktive-karten-erstellen}}
 
 \begin{frame}[fragile]{Beispiel zu Campingplätzen}
+\protect\hypertarget{beispiel-zu-campingplatzen}{}
 
 \begin{itemize}
 \tightlist
@@ -2045,6 +2178,7 @@ erstellen}\label{interaktive-karten-erstellen}
 \end{frame}
 
 \begin{frame}{Überblick über Daten zu Campingplätzen}
+\protect\hypertarget{uberblick-uber-daten-zu-campingplatzen}{}
 
 \begin{longtable}[]{@{}rlll@{}}
 \toprule
@@ -2066,6 +2200,7 @@ X & name & tourism & website\tabularnewline
 \end{frame}
 
 \begin{frame}[fragile]{Notwendige Pakete}
+\protect\hypertarget{notwendige-pakete}{}
 
 \begin{block}{\href{https://cran.r-project.org/web/packages/magrittr/index.html}{\textbf{magrittr}}
 - für den Pipe Operator in R:}
@@ -2090,6 +2225,7 @@ Karten mit der JavaScript Bibliothek `Leaflet' zu erzeugen
 \end{frame}
 
 \begin{frame}[fragile]{Eine erste interaktive Karte}
+\protect\hypertarget{eine-erste-interaktive-karte}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2098,11 +2234,12 @@ Karten mit der JavaScript Bibliothek `Leaflet' zu erzeugen
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{D:/Daten/GitHub/IntroR/buildingblocks/figure/FirstLeaflet.PNG}
+\includegraphics{D:/GitHub/IntroR/buildingblocks/figure/FirstLeaflet.PNG}
 
 \end{frame}
 
 \begin{frame}[fragile]{Auf eine Stadt zoomen}
+\protect\hypertarget{auf-eine-stadt-zoomen}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2113,11 +2250,12 @@ Karten mit der JavaScript Bibliothek `Leaflet' zu erzeugen
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{D:/Daten/GitHub/IntroR/buildingblocks/figure/leafletMZESMA.PNG}
+\includegraphics{D:/GitHub/IntroR/buildingblocks/figure/leafletMZESMA.PNG}
 
 \end{frame}
 
 \begin{frame}[fragile]{Eine interaktive Karte}
+\protect\hypertarget{eine-interaktive-karte}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2134,6 +2272,7 @@ Karten mit der JavaScript Bibliothek `Leaflet' zu erzeugen
 
 \begin{frame}[fragile]{Das Paket \texttt{leaflet} - Visualisierung von
 Geokodierung}
+\protect\hypertarget{das-paket-leaflet---visualisierung-von-geokodierung}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2158,6 +2297,7 @@ Geokodierung}
 
 \begin{frame}[fragile]{\href{https://rstudio.github.io/leaflet/basemaps.html}{Stamen
 als Hintergrundkarte}}
+\protect\hypertarget{stamen-als-hintergrundkarte}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2165,11 +2305,12 @@ als Hintergrundkarte}}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{D:/Daten/GitHub/IntroR/buildingblocks/figure/InteractiveStamen.PNG}
+\includegraphics{D:/GitHub/IntroR/buildingblocks/figure/InteractiveStamen.PNG}
 
 \end{frame}
 
 \begin{frame}[fragile]{CartoDB als Hintergrund}
+\protect\hypertarget{cartodb-als-hintergrund}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2177,7 +2318,7 @@ als Hintergrundkarte}}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{D:/Daten/GitHub/IntroR/buildingblocks/figure/CartoDBInteractive.PNG}
+\includegraphics{D:/GitHub/IntroR/buildingblocks/figure/CartoDBInteractive.PNG}
 
 \begin{itemize}
 \item
@@ -2191,6 +2332,7 @@ als Hintergrundkarte}}
 
 \begin{frame}[fragile]{\href{http://leaflet-extras.github.io/leaflet-providers/preview/index.html}{Mehr
 Hintergründe}}
+\protect\hypertarget{mehr-hintergrunde}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2198,11 +2340,12 @@ Hintergründe}}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{D:/Daten/GitHub/IntroR/buildingblocks/figure/LightsInteractive.PNG}
+\includegraphics{D:/GitHub/IntroR/buildingblocks/figure/LightsInteractive.PNG}
 
 \end{frame}
 
 \begin{frame}[fragile]{Mehr Informationen hinzufügen}
+\protect\hypertarget{mehr-informationen-hinzufugen}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2228,14 +2371,16 @@ Das Ergebnis ist hier:
 \end{frame}
 
 \begin{frame}{Die resultierende Karte}
+\protect\hypertarget{die-resultierende-karte}{}
 
-\includegraphics{D:/Daten/GitHub/IntroR/buildingblocks/figure/Germany_Campsites.PNG}
+\includegraphics{D:/GitHub/IntroR/buildingblocks/figure/Germany_Campsites.PNG}
 
 \end{frame}
 
 \begin{frame}{Popups in einer interactiven Karte}
+\protect\hypertarget{popups-in-einer-interactiven-karte}{}
 
-\includegraphics{D:/Daten/GitHub/IntroR/buildingblocks/figure/Camping_Mannheim.PNG}
+\includegraphics{D:/GitHub/IntroR/buildingblocks/figure/Camping_Mannheim.PNG}
 
 Ich hab die Ergebnisse hochgeladen:
 
@@ -2244,12 +2389,14 @@ Ich hab die Ergebnisse hochgeladen:
 \end{frame}
 
 \begin{frame}{Wie man auf Rpubs publizieren kann}
+\protect\hypertarget{wie-man-auf-rpubs-publizieren-kann}{}
 
-\includegraphics{D:/Daten/GitHub/IntroR/buildingblocks/figure/PublishCampSitesGermany.PNG}
+\includegraphics{D:/GitHub/IntroR/buildingblocks/figure/PublishCampSitesGermany.PNG}
 
 \end{frame}
 
 \begin{frame}[fragile]{Ein weiteres Beispiel - Weltkulturerbe}
+\protect\hypertarget{ein-weiteres-beispiel---weltkulturerbe}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2263,6 +2410,7 @@ Ich hab die Ergebnisse hochgeladen:
 \end{frame}
 
 \begin{frame}[fragile]{Eine interaktive Karte erstellen}
+\protect\hypertarget{eine-interaktive-karte-erstellen}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2278,12 +2426,14 @@ Ich hab die Ergebnisse hochgeladen:
 \end{frame}
 
 \begin{frame}{Die Karte zeigen}
+\protect\hypertarget{die-karte-zeigen}{}
 
-\includegraphics{D:/Daten/GitHub/IntroR/buildingblocks/figure/WHCPopUps.PNG}
+\includegraphics{D:/GitHub/IntroR/buildingblocks/figure/WHCPopUps.PNG}
 
 \end{frame}
 
 \begin{frame}[fragile]{Farbe hinzu}
+\protect\hypertarget{farbe-hinzu}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2296,6 +2446,7 @@ Ich hab die Ergebnisse hochgeladen:
 \end{frame}
 
 \begin{frame}[fragile]{Eine Karte mit Farbe erzeugen}
+\protect\hypertarget{eine-karte-mit-farbe-erzeugen}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2312,19 +2463,22 @@ Ich hab die Ergebnisse hochgeladen:
 \end{frame}
 
 \begin{frame}{Die Karte zeigen}
+\protect\hypertarget{die-karte-zeigen-1}{}
 
-\includegraphics{D:/Daten/GitHub/IntroR/buildingblocks/figure/WHCcircles.PNG}
+\includegraphics{D:/GitHub/IntroR/buildingblocks/figure/WHCcircles.PNG}
 
 \end{frame}
 
 \begin{frame}{\href{http://www.r-bloggers.com/interactive-mapping-with-leaflet-in-r-2/}{Die
 Karte abspeichern}}
+\protect\hypertarget{die-karte-abspeichern}{}
 
-\includegraphics{D:/Daten/GitHub/IntroR/buildingblocks/figure/snapshot2.png}
+\includegraphics{D:/GitHub/IntroR/buildingblocks/figure/snapshot2.png}
 
 \end{frame}
 
 \begin{frame}{Links und Quellen}
+\protect\hypertarget{links-und-quellen}{}
 
 \begin{itemize}
 \item
