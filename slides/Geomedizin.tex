@@ -304,10 +304,10 @@ Aus den folgenden Gründen:
   Starte RStudio. Gehe in die Konsole (meistens Fenster unten links) und
   tippe
 \item
-  Wenn noch kein Skript geöffnet im oberen linken Teil von Rstudio
-  geöffnet ist, gehe zum Menü und öffne ein neues Skript. Checks das
-  Datum mit \texttt{date()} und die R version mit
-  \texttt{sessionInfo()}.
+  Erzeuge ein neues R Script (Ctrl + Shift + N)
+\item
+  Das Datum bekommt man mit der Funktion \texttt{date()} und die R
+  Version mit \texttt{sessionInfo()}.
 \end{itemize}
 
 \end{frame}
@@ -377,10 +377,10 @@ Objekts erfahren:
 
 \end{frame}
 
-\begin{frame}[fragile]{Übung - Zuweisungen und Funktionen}
+\begin{frame}[fragile]{Übung - Zuweisungen}
 
-Erstellen Sie einen Vektor \texttt{b} mit den Zahlen von 1 bis 5 und
-berechnen Sie\ldots{}.
+Erstelle einen Vektor \texttt{b} mit den Zahlen von 1 bis 5 und
+berechne\ldots{}.
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -893,50 +893,476 @@ Paketen\ldots{}
 
 \end{frame}
 
+\section{Warum die räumliche
+Perspektive}\label{warum-die-raumliche-perspektive}
+
+\begin{frame}{Warum die Darstellung in Karten}
+
+\begin{itemize}
+\item
+  Darstellung in Karten ermöglicht besseres Verständnis von
+  sozialwissenschaftlicher Phänomene - Attraktiver Output
+\item
+  Durch die INSPIRE Richtlinie und \emph{Collaborative Mapping} wächst
+  der verfügbare Bestand an Geodaten.
+\item
+  Daten sind oft frei verfügbar im Internet (z.B. Nutzung von APIs)
+\item
+  Allerdings sind die Daten oft wenig strukturiert, heterogen oder nicht
+  zur räumlichen Visualisierung vorgesehen
+\item
+  beinhalten aber implizit geographische Informationen (Web 2.0)
+\item
+  Oftmals sind wenig oder keine Metadaten vorhanden
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{\href{https://www.ratswd.de/dl/downloads/RatSWD_Geodatenbericht.pdf}{Das
+Thema Geodatenlandschaft}}
+
+\includegraphics{D:/Daten/GitHub/IntroR/buildingblocks/figure/BildRatSWDBericht.png}
+
+\end{frame}
+
+\begin{frame}{Was heißt das für diesen Kurs}
+
+\begin{block}{Vorgestellt werden:}
+
+\begin{itemize}
+\tightlist
+\item
+  Möglichkeiten für den Download, den Import, die Verarbeitung und die
+  Visualisierung von Geodaten
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  Quellen für Geodaten
+\item
+  Eine Programmierschnittstelle (APIs) um die Daten zu bekommen
+\item
+  R-Pakete um diese Daten zu verarbeiten und zu visualisieren
+\end{itemize}
+
+\end{block}
+
+\end{frame}
+
+\section{OpenStreetMap}\label{openstreetmap}
+
+\begin{frame}{Inhalt dieses Abschnitts}
+
+\begin{itemize}
+\tightlist
+\item
+  Vorstellung des Openstreetmap (OSM) Projekts
+\item
+  Welche OSM-Daten sind erhältlich und wie kann man diese bekommen?
+\item
+  Präsentation des Key-Value Schemas, dass bei OSM Daten verwendet wird.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{\href{http://www.openstreetmap.de/}{OpenStreetMap}
+Projekt}
+
+\begin{block}{\url{http://www.openstreetmap.de/}}
+
+\begin{quote}
+OpenStreetMap.org ist ein im Jahre 2004 gegründetes internationales
+Projekt mit dem Ziel, eine freie Weltkarte zu erschaffen. Dafür sammeln
+wir weltweit Daten über Straßen, Eisenbahnen, Flüsse, Wälder, Häuser und
+vieles mehr.
+\end{quote}
+
+\end{block}
+
+\end{frame}
+
+\begin{frame}{OpenStreetMap}
+
+\begin{block}{\href{https://en.wikipedia.org/wiki/OpenStreetMap}{\textbf{Wikipedia
+- OpenStreetMap}}}
+
+\begin{quote}
+OpenStreetMap (OSM) ist ein kollaboratives Projekt um eine editierbare
+Weltkarte zu erzeugen.
+\end{quote}
+
+\includegraphics{D:/Daten/GitHub/IntroR/buildingblocks/figure/overview_osm.PNG}
+
+\end{block}
+
+\end{frame}
+
+\begin{frame}[fragile]{\href{https://wiki.openstreetmap.org/wiki/Tags}{Openstreetmap
+Tags}}
+
+\includegraphics{D:/Daten/GitHub/IntroR/buildingblocks/figure/kv_scheme.PNG}
+
+\begin{itemize}
+\tightlist
+\item
+  Mit dem \texttt{key} wird eine Kategorie bezeichnet.
+\item
+  Der \texttt{value} wird zur Beschreibung der jeweiligen Form
+  verwendet.
+\item
+  So gibt es bspw. zahlreiche OSM-Objekte mit dem \texttt{key} highway.
+  Dabei kann es sich bspw. um einen Fußweg (value=pathway) oder um eine
+  Autobahn (value=motorway) handeln.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{\href{http://wiki.openstreetmap.org/wiki/DE:Map_Features}{OSM
+Map Features}}
+
+\includegraphics{D:/Daten/GitHub/IntroR/buildingblocks/figure/osm_mapfeatures.png}
+
+\end{frame}
+
+\begin{frame}{Objekttypen in OSM}
+
+\begin{block}{Es gibt prinipiell drei verschiedene Objekttypen:}
+
+\begin{itemize}
+\tightlist
+\item
+  Es gibt einfache nodes, also Punkte. Das kann bspw. eine Haltestelle
+  des öffentlichen Nahverkehrs sein.
+\item
+  Der zweite Objekttyp sind Wege. Dadurch wird beispielsweise der
+  Verlauf von Straßen oder Flüssen beschrieben.
+\item
+  Der dritte Objekttyp sind Relationen. Dabei handelt es sich um eine
+  Gruppierung von Objekten, die in einem logischen Zusammenhang stehen.
+\end{itemize}
+
+Hippolyte Pruvost and Peter Mooney: Exploring Data Model Relations in
+OpenStreetMap
+
+\end{block}
+
+\end{frame}
+
+\begin{frame}{OpenStreetMap objects}
+
+\begin{block}{\href{https://www.slideshare.net/mvexel/openstreetmap-9819440}{\textbf{Martijn
+van Exel}} - nodes and ways}
+
+\includegraphics{D:/Daten/GitHub/IntroR/buildingblocks/figure/Nodes_ways.PNG})
+
+\end{block}
+
+\end{frame}
+
+\begin{frame}{OpenStreetMap objects}
+
+\begin{block}{Relations}
+
+\includegraphics{D:/Daten/GitHub/IntroR/buildingblocks/figure/relations.PNG})
+
+\end{block}
+
+\end{frame}
+
+\begin{frame}{Möglichkeiten die OSM-Daten zu bekommen}
+
+\begin{itemize}
+\tightlist
+\item
+  Es gibt verschiedene Möglichkeiten die OSM-Daten zu bekommen.
+\item
+  Metro Extracts bietet rechteckige Ausschnitte für eine Stadt oder
+  Region von Interesse auf der ganzen Welt.
+\item
+  Grundsätzlich werden die Rohdaten im \emph{Protocolbuffer Binary
+  Format} (PBF) oder im \emph{Extensible Markup Language} (XML) Format
+  angeboten.
+\item
+  Die
+  \href{https://de.wikipedia.org/wiki/Keyhole_Markup_Language}{\textbf{Keyhole
+  Markup Language}} (KML) ist eine Auszeichnungssprache zur Beschreibung
+  von Geodaten. Diese wurde bei Google Earth angewendet. KML befolgt die
+  XML-Syntax.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Download von OpenStreetMap Daten -
+\href{https://mapzen.com/}{Metro extracts}}
+
+\begin{itemize}
+\tightlist
+\item
+  Ausschnitte von OpenStreetMap für einzelne Städte
+  (\href{https://mapzen.com/data/metro-extracts/}{\textbf{metro
+  extracts}})
+\end{itemize}
+
+\includegraphics{D:/Daten/GitHub/IntroR/buildingblocks/figure/metroextracts.png})
+
+\end{frame}
+
+\begin{frame}{Download von OpenStreetMap Daten - Geofabrik}
+
+\begin{block}{Geofabrik}
+
+\begin{itemize}
+\tightlist
+\item
+  Eine Alternative zum Downlaod von großen OSM-Ausschnitten ist die
+  \href{http://download.geofabrik.de/}{\textbf{Geofabrik}}-Seite.\\
+\item
+  Hier lassen sich ebenfalls aktuelle Ausschnitte aber auch Shapefiles
+  herunterladen.
+\end{itemize}
+
+\includegraphics{D:/Daten/GitHub/IntroR/buildingblocks/figure/Geofabrik.PNG})
+
+\end{block}
+
+\end{frame}
+
+\begin{frame}{OSM Planet file}
+
+\begin{block}{Datenbanklösungen}
+
+\begin{itemize}
+\tightlist
+\item
+  Bei den eben vorgestellten Möglichkeiten geht es vor allem um das
+  Herunterladen kleiner Ausschnitte.
+\item
+  Wenn größere Datenmengen benötigt werden, sollte man eine
+  Datenbanklösung nutzen.
+\item
+  \href{http://www.postgresql.org/}{\textbf{PostgreSQL}} hat den
+  Vorteil, dass es Open-Source ist.
+\end{itemize}
+
+\end{block}
+
+\end{frame}
+
+\begin{frame}{\href{http://www.postgresql.org/download/windows/}{Download
+PostgreSQL}}
+
+\begin{itemize}
+\tightlist
+\item
+  \href{https://datashenanigan.wordpress.com/2015/05/18/getting-started-with-postgresql-in-r/}{\textbf{Hier}}
+  ist eine Einführung in PostgreSQL zu finden
+\end{itemize}
+
+\includegraphics{D:/Daten/GitHub/IntroR/buildingblocks/figure/aquadatastudio_postgresql_visual_table_editing.png})
+
+\end{frame}
+
+\begin{frame}{pgAdmin}
+
+\begin{itemize}
+\tightlist
+\item
+  Sehr empfehlenswert: Arbeiten mit
+  \href{https://www.pgadmin.org/}{\textbf{pgAdmin}}
+\item
+  Beispiel: um Verknüpfung zu einer Datenbank herzustellen - Doppelklick
+  auf den Server in pgAdmin
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]{PostGIS für PostgreSQL}
+
+\begin{itemize}
+\tightlist
+\item
+  \href{http://postgis.net/install/}{\textbf{Installieren}} der PostGIS
+  Erweiterung:
+\end{itemize}
+
+\begin{verbatim}
+CREATE EXTENSION postgis;
+\end{verbatim}
+
+\includegraphics{D:/Daten/GitHub/IntroR/buildingblocks/figure/PostGIS_logo.png})
+
+\end{frame}
+
+\begin{frame}[fragile]{Programm zum Import der OSM Daten in PostgreSQL-
+osm2pgsql}
+
+\begin{itemize}
+\tightlist
+\item
+  Läuft unter Linux deutlich besser
+\item
+  so könnte bspw. ein Import in PostgreSQL aussehen:
+\end{itemize}
+
+\begin{verbatim}
+osm2pgsql -c -d osmBerlin --slim -C  -k  berlin-latest.osm.pbf
+\end{verbatim}
+
+\end{frame}
+
+\begin{frame}[fragile]{Verbindung zwischen R und Postrgesql}
+
+\begin{block}{\href{https://github.com/tomoakin/RPostgreSQL}{\textbf{Github
+Verzeichnis}} zum Paket}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{"RPostgreSQL"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(}\StringTok{"RPostgreSQL"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\end{block}
+
+\end{frame}
+
+\begin{frame}{Nutzung von Quantum GIS}
+
+\begin{block}{\href{https://www.qgis.org/de/site/}{\textbf{QGIS}} - Ein
+freies Open-Source-Geographisches-Informationssystem}
+
+\begin{itemize}
+\tightlist
+\item
+  Erstellen, bearbeiten, anzeigen, analysieren räumlicher Information
+  unter Windows, Mac, Linux, BSD (bald auch Android)
+\item
+  Mit QGIS kann bspw auch der WMS/WCS oder WFS-Dienst des IÖR-Monitors
+  genutzt werden.
+\end{itemize}
+
+\includegraphics{D:/Daten/GitHub/IntroR/buildingblocks/figure/Bilder_qgis.PNG})
+
+\end{block}
+
+\end{frame}
+
+\begin{frame}{Nutze bspw. \href{http://www.qgis.org/de/site/}{QGIS} um
+Shapefiles zu extrahieren}
+
+\begin{itemize}
+\tightlist
+\item
+  \href{http://www.qgistutorials.com/de/docs/downloading_osm_data.html}{Plugin
+  OpenLayers}
+\end{itemize}
+
+\includegraphics{D:/Daten/GitHub/IntroR/buildingblocks/figure/stamen_watercolor1.png})
+
+\end{frame}
+
+\begin{frame}{Links}
+
+\begin{itemize}
+\item
+  \href{http://wiki.openstreetmap.org/wiki/Downloading_data}{\textbf{Wiki
+  zum Downlaod}} von Openstreetmap Daten
+\item
+  Auf dem \href{http://blog.openstreetmap.de/}{\textbf{Openstreetmap
+  Blog}} gibt es wöchentlich neue Nachrichten zu OSM.
+\item
+  Liste möglicher Datenquellen für räumliche Analysen
+  (\href{http://wiki.openstreetmap.org/wiki/Potential_Datasources}{weltweit}
+  und in
+  \href{http://wiki.openstreetmap.org/wiki/DE:Potential_Datasources}{\textbf{Deutschland}}
+  )
+\item
+  Daten zu Administrative Grenzen kann man bei \emph{Second
+  Administrative Level Boundaries}
+  (\href{http://wiki.openstreetmap.org/wiki/SALB}{\textbf{SALB}})
+  bekommen
+\end{itemize}
+
+\end{frame}
+
+\section{Use Case Geomedizin}\label{use-case-geomedizin}
+
+\begin{frame}{OpenStreetMap}
+
+\includegraphics{D:/Daten/GitHub/IntroR/buildingblocks/figure/Openstreetmap_logo.svg.png}
+
+\end{frame}
+
+\begin{frame}{\href{https://wiki.openstreetmap.org/wiki/DE:Key:healthcare}{DE:Key:healthcare}}
+
+\includegraphics{D:/Daten/GitHub/IntroR/buildingblocks/figure/key_healthcare.PNG}
+
+\end{frame}
+
+\begin{frame}{Orte für die Blutspende}
+
+\includegraphics{D:/Daten/GitHub/IntroR/buildingblocks/figure/healthcare_blood_donation.PNG}
+
+\end{frame}
+
+\begin{frame}[fragile]{\href{https://overpass-turbo.eu/}{Die Nutzung von
+Overpass}}
+
+\begin{verbatim}
+node
+  [healthcare=blood_donation]
+  ({{bbox}});
+out;
+\end{verbatim}
+
+\end{frame}
+
+\begin{frame}[fragile]{Alternativmediziner}
+
+\begin{verbatim}
+node
+  [healthcare=alternative]
+  ({{bbox}});
+out;
+\end{verbatim}
+
+\end{frame}
+
 \section{Erste Karten}\label{erste-karten}
 
 \begin{frame}[fragile]{Das Paket maptools}
 
 \begin{itemize}
-\tightlist
 \item
   Datensatz \texttt{wrld\_simpl} aus dem Paket
   \href{https://cran.r-project.org/web/packages/maptools/index.html}{maptools}
 \item
   Polygone für fast alle Staaten der Erde
+
+  \begin{longtable}[]{@{}rrrrrl@{}}
+  \toprule
+  FIPS & ISO2 & ISO3 & UN & NAME &\tabularnewline
+  \midrule
+  \endhead
+  ATG & AC & AG & ATG & 28 & Antigua and Barbuda\tabularnewline
+  DZA & AG & DZ & DZA & 12 & Algeria\tabularnewline
+  AZE & AJ & AZ & AZE & 31 & Azerbaijan\tabularnewline
+  ALB & AL & AL & ALB & 8 & Albania\tabularnewline
+  \bottomrule
+  \end{longtable}
 \end{itemize}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(maptools)}
-\KeywordTok{data}\NormalTok{(wrld_simpl)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{longtable}[]{@{}llllrl@{}}
-\toprule
-& FIPS & ISO2 & ISO3 & UN & NAME\tabularnewline
-\midrule
-\endhead
-ATG & AC & AG & ATG & 28 & Antigua and Barbuda\tabularnewline
-DZA & AG & DZ & DZA & 12 & Algeria\tabularnewline
-AZE & AJ & AZ & AZE & 31 & Azerbaijan\tabularnewline
-ALB & AL & AL & ALB & 8 & Albania\tabularnewline
-\bottomrule
-\end{longtable}
 
 \end{frame}
 
-\begin{frame}[fragile]{Hello world}
+\begin{frame}{Hello world}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{data}\NormalTok{(wrld_simpl)}
-\KeywordTok{plot}\NormalTok{(wrld_simpl)}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-62-1.pdf}
+\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-83-1.pdf}
 
 \end{frame}
 
@@ -947,12 +1373,6 @@ ALB & AL & AL & ALB & 8 & Albania\tabularnewline
 \item
   Es handelt sich um einen \texttt{shapefile}
 \end{itemize}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{typeof}\NormalTok{(wrld_simpl)}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
 ## [1] "S4"
@@ -970,13 +1390,7 @@ ALB & AL & AL & ALB & 8 & Albania\tabularnewline
 
 \end{frame}
 
-\begin{frame}[fragile]{Der Datensatz}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{head}\NormalTok{(wrld_simpl}\OperatorTok{@}\NormalTok{data)}
-\end{Highlighting}
-\end{Shaded}
+\begin{frame}{Der Datensatz}
 
 \begin{longtable}[]{@{}llllrl@{}}
 \toprule
@@ -994,34 +1408,16 @@ ALB & AL & AL & ALB & 8 & Albania\tabularnewline
 
 \begin{frame}[fragile]{Die Struktur der Daten}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{head}\NormalTok{(wrld_simpl}\OperatorTok{@}\NormalTok{data}\OperatorTok{$}\NormalTok{NAME)}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
 ## [1] Antigua and Barbuda Algeria             Azerbaijan         
 ## [4] Albania             Armenia             Angola             
 ## 246 Levels: Aaland Islands Afghanistan Albania Algeria ... Zimbabwe
 \end{verbatim}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{head}\NormalTok{(wrld_simpl}\OperatorTok{@}\NormalTok{data}\OperatorTok{$}\NormalTok{ISO2)}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
 ## [1] AG DZ AZ AL AM AO
 ## 246 Levels: AD AE AF AG AI AL AM AN AO AQ AR AS AT AU AW AX AZ BA BB ... ZW
 \end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{head}\NormalTok{(wrld_simpl}\OperatorTok{@}\NormalTok{data}\OperatorTok{$}\NormalTok{POP2005)}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
 ## [1]    83039 32854159  8352021  3153731  3017661 16095214
@@ -1031,22 +1427,9 @@ ALB & AL & AL & ALB & 8 & Albania\tabularnewline
 
 \begin{frame}[fragile]{Eine logische Abfrage}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{ind_SA <-}\StringTok{ }\NormalTok{wrld_simpl}\OperatorTok{@}\NormalTok{data}\OperatorTok{$}\NormalTok{NAME }\OperatorTok{==}\StringTok{"South Africa"}
-\KeywordTok{head}\NormalTok{(ind_SA)}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
 ## [1] FALSE FALSE FALSE FALSE FALSE FALSE
 \end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{table}\NormalTok{(ind_SA)}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
 ## ind_SA
@@ -1056,7 +1439,7 @@ ALB & AL & AL & ALB & 8 & Albania\tabularnewline
 
 \end{frame}
 
-\begin{frame}[fragile]{Eine Karte für Süd Afrika}
+\begin{frame}{Eine Karte für Süd Afrika}
 
 \begin{itemize}
 \tightlist
@@ -1064,260 +1447,111 @@ ALB & AL & AL & ALB & 8 & Albania\tabularnewline
   Ein Land zeichnen
 \end{itemize}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{SouthAfrica <-}\StringTok{ }\NormalTok{wrld_simpl[ind_SA,]}
-\KeywordTok{plot}\NormalTok{(SouthAfrica)}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-71-1.pdf}
+\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-92-1.pdf}
 
 \end{frame}
 
-\begin{frame}[fragile]{Mehr als ein Land zeichnen}
+\begin{frame}{Mehr als ein Land zeichnen}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{EuropeList <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{'Germany'}\NormalTok{, }\StringTok{'France'}\NormalTok{)}
-\NormalTok{my_map <-}\StringTok{ }\NormalTok{wrld_simpl[wrld_simpl}\OperatorTok{$}\NormalTok{NAME }\OperatorTok{%in%}\StringTok{ }\NormalTok{EuropeList, ]}
-\KeywordTok{par}\NormalTok{(}\DataTypeTok{mai=}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{))}
-\KeywordTok{plot}\NormalTok{(my_map)}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-72-1.pdf}
+\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-93-1.pdf}
 
 \end{frame}
 
-\begin{frame}[fragile]{Mehr Farbe}
+\begin{frame}{Mehr Farbe}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{my_map}\OperatorTok{@}\NormalTok{data}\OperatorTok{$}\NormalTok{color <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"blue"}\NormalTok{,}\StringTok{"green"}\NormalTok{)}
-\KeywordTok{plot}\NormalTok{(my_map,}\DataTypeTok{col=}\NormalTok{my_map}\OperatorTok{@}\NormalTok{data}\OperatorTok{$}\NormalTok{color)}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-73-1.pdf}
+\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-94-1.pdf}
 
 \end{frame}
 
-\begin{frame}[fragile]{Mehr Farbe für die Welt}
+\begin{frame}{Mehr Farbe für die Welt}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{plot}\NormalTok{(wrld_simpl, }\DataTypeTok{bg=}\StringTok{'azure2'}\NormalTok{, }\DataTypeTok{col=}\StringTok{'green'}\NormalTok{,}
-     \DataTypeTok{border=}\StringTok{'lightgray'}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-74-1.pdf}
+\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-95-1.pdf}
 
 \end{frame}
 
-\begin{frame}[fragile]{Eine Karte für Europa}
+\begin{frame}{Eine Karte für Europa}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{Europe <-}\StringTok{ }\NormalTok{wrld_simpl[wrld_simpl}\OperatorTok{$}\NormalTok{REGION}\OperatorTok{==}\StringTok{"150"}\NormalTok{,]}
-\KeywordTok{plot}\NormalTok{(Europe,}\DataTypeTok{col=}\StringTok{"royalblue"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-75-1.pdf}
+\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-96-1.pdf}
 
 \end{frame}
 
-\begin{frame}[fragile]{Europa ohne Russland}
+\begin{frame}{Europa ohne Russland}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{ind <-}\StringTok{ }\KeywordTok{which}\NormalTok{(Europe}\OperatorTok{@}\NormalTok{data}\OperatorTok{$}\NormalTok{NAME}\OperatorTok{==}\StringTok{"Russia"}\NormalTok{)}
-\NormalTok{EU <-}\StringTok{ }\NormalTok{Europe[}\OperatorTok{-}\NormalTok{ind,]}
-\KeywordTok{plot}\NormalTok{(EU,}\DataTypeTok{col=}\StringTok{"blue"}\NormalTok{,}\DataTypeTok{border=}\StringTok{"darkgray"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-76-1.pdf}
+\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-97-1.pdf}
 
 \end{frame}
 
-\begin{frame}[fragile]{Spielen Sie mit Farben}
+\begin{frame}{Spielen Sie mit Farben}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{EU}\OperatorTok{$}\NormalTok{colors <-}\StringTok{ "green"}
-\KeywordTok{plot}\NormalTok{(EU,}\DataTypeTok{col=}\NormalTok{EU}\OperatorTok{$}\NormalTok{colors,}\DataTypeTok{border=}\StringTok{"darkgray"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-77-1.pdf}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{pop05 <-}\StringTok{ }\NormalTok{Europe}\OperatorTok{$}\NormalTok{POP2005}
-\NormalTok{Europe}\OperatorTok{$}\NormalTok{colors[pop05}\OperatorTok{>}\KeywordTok{mean}\NormalTok{(pop05)] <-}\StringTok{ "royalblue"}
-\KeywordTok{plot}\NormalTok{(Europe,}\DataTypeTok{col=}\NormalTok{Europe}\OperatorTok{$}\NormalTok{colors)}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-77-2.pdf}
+\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-98-1.pdf}
+\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-98-2.pdf}
 
 \end{frame}
 
-\begin{frame}[fragile]{Mehr über Farben}
+\begin{frame}{Mehr über Farben}
 
 \href{http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf}{Colors in
 R}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{Europe}\OperatorTok{$}\NormalTok{colors[pop05}\OperatorTok{>}\KeywordTok{median}\NormalTok{(pop05)] <-}\StringTok{ "chocolate4"}
-\KeywordTok{plot}\NormalTok{(Europe,}\DataTypeTok{col=}\NormalTok{Europe}\OperatorTok{$}\NormalTok{colors)}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-78-1.pdf}
+\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-99-1.pdf}
 
 \end{frame}
 
-\begin{frame}[fragile]{Europa - Farbschattierung blau}
+\begin{frame}{Europa - Farbschattierung blau}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{val <-}\StringTok{ }\NormalTok{Europe}\OperatorTok{$}\NormalTok{POP2005}\OperatorTok{/}\KeywordTok{max}\NormalTok{(Europe}\OperatorTok{$}\NormalTok{POP2005)}
-\KeywordTok{plot}\NormalTok{(Europe,}\DataTypeTok{col=}\KeywordTok{rgb}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,val))}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-79-1.pdf}
+\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-100-1.pdf}
 
 \end{frame}
 
-\begin{frame}[fragile]{Europa - Farbschattierung rot}
+\begin{frame}{Europa - Farbschattierung rot}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{val <-}\StringTok{ }\NormalTok{Europe}\OperatorTok{$}\NormalTok{POP2005}\OperatorTok{/}\KeywordTok{max}\NormalTok{(Europe}\OperatorTok{$}\NormalTok{POP2005)}
-\KeywordTok{plot}\NormalTok{(Europe,}\DataTypeTok{col=}\KeywordTok{rgb}\NormalTok{(val,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{))}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-80-1.pdf}
+\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-101-1.pdf}
 
 \end{frame}
 
-\begin{frame}[fragile]{Europa - Farbschattierung grün}
+\begin{frame}{Europa - Farbschattierung grün}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{val <-}\StringTok{ }\NormalTok{Europe}\OperatorTok{$}\NormalTok{POP2005}\OperatorTok{/}\KeywordTok{max}\NormalTok{(Europe}\OperatorTok{$}\NormalTok{POP2005)}
-\KeywordTok{plot}\NormalTok{(Europe,}\DataTypeTok{col=}\KeywordTok{rgb}\NormalTok{(}\DecValTok{0}\NormalTok{,val,}\DecValTok{0}\NormalTok{))}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-81-1.pdf}
+\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-102-1.pdf}
 
 \end{frame}
 
-\begin{frame}[fragile]{Europa - Farbschattierung grau}
+\begin{frame}{Europa - Farbschattierung grau}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{val <-}\StringTok{ }\NormalTok{Europe}\OperatorTok{$}\NormalTok{POP2005}\OperatorTok{/}\KeywordTok{max}\NormalTok{(Europe}\OperatorTok{$}\NormalTok{POP2005)}
-\KeywordTok{plot}\NormalTok{(Europe,}\DataTypeTok{col=}\KeywordTok{rgb}\NormalTok{(val,val,val))}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-82-1.pdf}
+\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-103-1.pdf}
 
 \end{frame}
 
-\begin{frame}[fragile]{Europa - zwei Graphiken nebeneinander}
+\begin{frame}{Europa - zwei Graphiken nebeneinander}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{))}
-\KeywordTok{plot}\NormalTok{(Europe,}\DataTypeTok{col=}\KeywordTok{rgb}\NormalTok{(val,}\DecValTok{0}\NormalTok{,val))}
-\KeywordTok{plot}\NormalTok{(Europe,}\DataTypeTok{col=}\KeywordTok{rgb}\NormalTok{(val,val,}\DecValTok{0}\NormalTok{))}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-83-1.pdf}
+\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-104-1.pdf}
 
 \end{frame}
 
 \begin{frame}[fragile]{Europa - Punkte hinzufügen}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{which}\NormalTok{(Europe}\OperatorTok{$}\NormalTok{ISO2}\OperatorTok{==}\StringTok{"FR"}\NormalTok{) }\CommentTok{# 10}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
 ## [1] 10
 \end{verbatim}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{plot}\NormalTok{(Europe)}
-\KeywordTok{points}\NormalTok{(Europe}\OperatorTok{$}\NormalTok{LON[}\DecValTok{10}\NormalTok{],Europe}\OperatorTok{$}\NormalTok{LAT[}\DecValTok{10}\NormalTok{],}\DataTypeTok{col=}\StringTok{"red"}\NormalTok{,}\DataTypeTok{pch=}\DecValTok{20}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-84-1.pdf}
+\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-105-1.pdf}
 
 \end{frame}
 
-\begin{frame}[fragile]{Europa - Blasen hinzufügen}
+\begin{frame}{Europa - Blasen hinzufügen}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{pop <-}\StringTok{ }\NormalTok{Europe}\OperatorTok{$}\NormalTok{POP2005}
-\NormalTok{pop <-}\StringTok{ }\NormalTok{pop}\OperatorTok{/}\KeywordTok{max}\NormalTok{(pop)}\OperatorTok{*}\DecValTok{10}
-\KeywordTok{plot}\NormalTok{(Europe)}
-\KeywordTok{points}\NormalTok{(Europe}\OperatorTok{$}\NormalTok{LON,Europe}\OperatorTok{$}\NormalTok{LAT,}\DataTypeTok{cex=}\NormalTok{pop,}\DataTypeTok{col=}\KeywordTok{rgb}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{,.}\DecValTok{2}\NormalTok{),}
-\DataTypeTok{pch=}\DecValTok{20}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-85-1.pdf}
+\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-106-1.pdf}
 
 \end{frame}
 
-\begin{frame}[fragile]{Europa - Text hinzufügen}
+\begin{frame}{Europa - Text hinzufügen}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{plot}\NormalTok{(Europe)}
-\KeywordTok{text}\NormalTok{(Europe}\OperatorTok{$}\NormalTok{LON,Europe}\OperatorTok{$}\NormalTok{LAT,Europe}\OperatorTok{$}\NormalTok{ISO2,}\DataTypeTok{col=}\StringTok{"red"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-86-1.pdf}
+\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-107-1.pdf}
 
 \end{frame}
 
-\begin{frame}[fragile]{Europa - Linien hinzufügen}
+\begin{frame}{Europa - Linien hinzufügen}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{which}\NormalTok{(Europe}\OperatorTok{$}\NormalTok{ISO2}\OperatorTok{==}\StringTok{"FR"}\NormalTok{) }\CommentTok{# 15}
-\KeywordTok{which}\NormalTok{(Europe}\OperatorTok{$}\NormalTok{ISO2}\OperatorTok{==}\StringTok{"DE"}\NormalTok{) }\CommentTok{# 16}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{Dat <-}\StringTok{ }\KeywordTok{cbind}\NormalTok{(Europe}\OperatorTok{$}\NormalTok{LON[}\DecValTok{15}\OperatorTok{:}\DecValTok{16}\NormalTok{],Europe}\OperatorTok{$}\NormalTok{LAT[}\DecValTok{15}\OperatorTok{:}\DecValTok{16}\NormalTok{])}
-\KeywordTok{plot}\NormalTok{(Europe)}
-\KeywordTok{lines}\NormalTok{(Dat,}\DataTypeTok{col=}\StringTok{"red"}\NormalTok{,}\DataTypeTok{lwd=}\DecValTok{2}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-88-1.pdf}
+\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-109-1.pdf}
 
 \end{frame}
 
@@ -1653,7 +1887,7 @@ Shapefiles}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-117-1.pdf}
+\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-138-1.pdf}
 
 \end{frame}
 
@@ -1666,7 +1900,7 @@ Shapefiles}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-118-1.pdf}
+\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-139-1.pdf}
 
 \end{frame}
 
@@ -1688,7 +1922,7 @@ Shapefiles}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-119-1.pdf}
+\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-140-1.pdf}
 
 \end{frame}
 
@@ -1801,7 +2035,7 @@ Shapefiles}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-126-1.pdf}
+\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-147-1.pdf}
 
 \end{frame}
 
@@ -1947,7 +2181,7 @@ für Kartographie und Geodäsie (BKG)}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-142-1.pdf}
+\includegraphics{Geomedizin_files/figure-beamer/unnamed-chunk-163-1.pdf}
 
 \end{frame}
 

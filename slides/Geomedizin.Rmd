@@ -45,6 +45,18 @@ knitr::opts_chunk$set(echo = FALSE)
 ```{r child = '/../../IntroR/buildingblocks/geomotiv.Rmd'}
 ```
 
+# OpenStreetMap
+
+```{r child = '/../../IntroR/buildingblocks/OpenStreetMap.Rmd'}
+```
+
+# Use Case Geomedizin
+
+```{r child = '/../../IntroR/buildingblocks/osm_geomed.Rmd'}
+```
+
+
+
 # Erste Karten
 
 ```{r child = '/../../IntroR/buildingblocks/maptools.Rmd'}
@@ -65,3 +77,8 @@ knitr::opts_chunk$set(echo = FALSE)
 ```{r child = '/../../IntroR/buildingblocks/leaflet_package.Rmd'}
 ```
 
+<!--
+https://link.springer.com/article/10.1007/s00103-017-2647-1
+http://jiscg3.blogspot.com/2011/08/open-geo-health-workshop.html
+
+-->
