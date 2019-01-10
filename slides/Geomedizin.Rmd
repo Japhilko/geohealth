@@ -40,6 +40,11 @@ knitr::opts_chunk$set(echo = FALSE)
 ```{r child = '/../../IntroR/buildingblocks/rmodular.Rmd'}
 ```
 
+# Warum die räumliche Perspektive
+
+```{r child = '/../../IntroR/buildingblocks/geomotiv.Rmd'}
+```
+
 # Erste Karten
 
 ```{r child = '/../../IntroR/buildingblocks/maptools.Rmd'}
