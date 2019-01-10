@@ -40,6 +40,23 @@ knitr::opts_chunk$set(echo = FALSE)
 ```{r child = '/../../IntroR/buildingblocks/rmodular.Rmd'}
 ```
 
+# Warum die räumliche Perspektive
+
+```{r child = '/../../IntroR/buildingblocks/geomotiv.Rmd'}
+```
+
+# OpenStreetMap
+
+```{r child = '/../../IntroR/buildingblocks/OpenStreetMap.Rmd'}
+```
+
+# Use Case Geomedizin
+
+```{r child = '/../../IntroR/buildingblocks/osm_geomed.Rmd'}
+```
+
+
+
 # Erste Karten
 
 ```{r child = '/../../IntroR/buildingblocks/maptools.Rmd'}
@@ -60,3 +77,18 @@ knitr::opts_chunk$set(echo = FALSE)
 ```{r child = '/../../IntroR/buildingblocks/leaflet_package.Rmd'}
 ```
 
+<!--
+https://link.springer.com/article/10.1007/s00103-017-2647-1
+http://jiscg3.blogspot.com/2011/08/open-geo-health-workshop.html
+
+https://www.uni-trier.de/fileadmin/fb6/prof/RAU/Lehre/PPT_Humangeo/Humangeographie-Geomedizin.pdf
+https://www.aerzteblatt.de/archiv/81025/Medizinische-Geografie-Der-raeumliche-Blick-auf-Gesundheit
+
+https://de.wikipedia.org/wiki/Medizinische_Geographie
+
+http://docplayer.org/9658463-Geographie-machen-studium-theorie-geomedizin-medizin-leben.html
+
+OpenStreetMap + geohealth + r-project
+
+http://jiscg3.blogspot.com/2011/08/open-geo-health-workshop.html
+-->
