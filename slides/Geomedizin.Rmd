@@ -55,8 +55,6 @@ knitr::opts_chunk$set(echo = FALSE)
 ```{r child = '/../../IntroR/buildingblocks/osm_geomed.Rmd'}
 ```
 
-
-
 # Erste Karten
 
 ```{r child = '/../../IntroR/buildingblocks/maptools.Rmd'}
@@ -91,4 +89,6 @@ http://docplayer.org/9658463-Geographie-machen-studium-theorie-geomedizin-medizi
 OpenStreetMap + geohealth + r-project
 
 http://jiscg3.blogspot.com/2011/08/open-geo-health-workshop.html
+
+http://geoawesomeness.com/page/37/?m=0
 -->
